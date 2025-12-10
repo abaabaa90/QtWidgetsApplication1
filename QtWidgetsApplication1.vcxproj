@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8A8BD3A0-F694-43FC-BEB6-E50676A074D4}</ProjectGuid>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
+    <QtInstall>Qt5.14.2</QtInstall>
+    <QtModules>core;gui;widgets;printsupport</QtModules>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
+    <QtInstall>Qt5.14.2</QtInstall>
+    <QtModules>core;gui;widgets;printsupport</QtModules>
+    <QtBuildConfig>release</QtBuildConfig>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\VTK\VTK-9.5.2-install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PreprocessorDefinitions>_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>E:\VTK\VTK-9.5.2-install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vtkcgns-9.5d.lib;vtkChartsCore-9.5d.lib;vtkCommonColor-9.5d.lib;vtkCommonComputationalGeometry-9.5d.lib;vtkCommonCore-9.5d.lib;vtkCommonDataModel-9.5d.lib;vtkCommonExecutionModel-9.5d.lib;vtkCommonMath-9.5d.lib;vtkCommonMisc-9.5d.lib;vtkCommonSystem-9.5d.lib;vtkCommonTransforms-9.5d.lib;vtkDICOMParser-9.5d.lib;vtkDomainsChemistry-9.5d.lib;vtkDomainsChemistryOpenGL2-9.5d.lib;vtkdoubleconversion-9.5d.lib;vtkexodusII-9.5d.lib;vtkexpat-9.5d.lib;vtkFiltersAMR-9.5d.lib;vtkFiltersCellGrid-9.5d.lib;vtkFiltersCore-9.5d.lib;vtkFiltersExtraction-9.5d.lib;vtkFiltersFlowPaths-9.5d.lib;vtkFiltersGeneral-9.5d.lib;vtkFiltersGeneric-9.5d.lib;vtkFiltersGeometry-9.5d.lib;vtkFiltersGeometryPreview-9.5d.lib;vtkFiltersHybrid-9.5d.lib;vtkFiltersHyperTree-9.5d.lib;vtkFiltersImaging-9.5d.lib;vtkFiltersModeling-9.5d.lib;vtkFiltersParallel-9.5d.lib;vtkFiltersParallelImaging-9.5d.lib;vtkFiltersPoints-9.5d.lib;vtkFiltersProgrammable-9.5d.lib;vtkFiltersReduction-9.5d.lib;vtkFiltersSelection-9.5d.lib;vtkFiltersSMP-9.5d.lib;vtkFiltersSources-9.5d.lib;vtkFiltersStatistics-9.5d.lib;vtkFiltersTemporal-9.5d.lib;vtkFiltersTensor-9.5d.lib;vtkFiltersTexture-9.5d.lib;vtkFiltersTopology-9.5d.lib;vtkFiltersVerdict-9.5d.lib;vtkfmt-9.5d.lib;vtkfreetype-9.5d.lib;vtkGeovisCore-9.5d.lib;vtkgl2ps-9.5d.lib;vtkglad-9.5d.lib;vtkGUISupportQt-9.5d.lib;vtkGUISupportQtQuick-9.5d.lib;vtkGUISupportQtSQL-9.5d.lib;vtkhdf5_hl-9.5d.lib;vtkhdf5-9.5d.lib;vtkImagingColor-9.5d.lib;vtkImagingCore-9.5d.lib;vtkImagingFourier-9.5d.lib;vtkImagingGeneral-9.5d.lib;vtkImagingHybrid-9.5d.lib;vtkImagingMath-9.5d.lib;vtkImagingMorphological-9.5d.lib;vtkImagingSources-9.5d.lib;vtkImagingStatistics-9.5d.lib;vtkImagingStencil-9.5d.lib;vtkInfovisCore-9.5d.lib;vtkInfovisLayout-9.5d.lib;vtkInteractionImage-9.5d.lib;vtkInteractionStyle-9.5d.lib;vtkInteractionWidgets-9.5d.lib;vtkIOAMR-9.5d.lib;vtkIOAsynchronous-9.5d.lib;vtkIOCellGrid-9.5d.lib;vtkIOCesium3DTiles-9.5d.lib;vtkIOCGNSReader-9.5d.lib;vtkIOChemistry-9.5d.lib;vtkIOCityGML-9.5d.lib;vtkIOCONVERGECFD-9.5d.lib;vtkIOCore-9.5d.lib;vtkIOEngys-9.5d.lib;vtkIOEnSight-9.5d.lib;vtkIOERF-9.5d.lib;vtkIOExodus-9.5d.lib;vtkIOExport-9.5d.lib;vtkIOExportGL2PS-9.5d.lib;vtkIOExportPDF-9.5d.lib;vtkIOFDS-9.5d.lib;vtkIOFLUENTCFF-9.5d.lib;vtkIOGeometry-9.5d.lib;vtkIOHDF-9.5d.lib;vtkIOImage-9.5d.lib;vtkIOImport-9.5d.lib;vtkIOInfovis-9.5d.lib;vtkIOIOSS-9.5d.lib;vtkIOLANLX3D-9.5d.lib;vtkIOLegacy-9.5d.lib;vtkIOLSDyna-9.5d.lib;vtkIOMINC-9.5d.lib;vtkIOMotionFX-9.5d.lib;vtkIOMovie-9.5d.lib;vtkIONetCDF-9.5d.lib;vtkIOOggTheora-9.5d.lib;vtkIOParallel-9.5d.lib;vtkIOParallelXML-9.5d.lib;vtkIOPLY-9.5d.lib;vtkIOSegY-9.5d.lib;vtkIOSQL-9.5d.lib;vtkioss-9.5d.lib;vtkIOTecplotTable-9.5d.lib;vtkIOVeraOut-9.5d.lib;vtkIOVideo-9.5d.lib;vtkIOXML-9.5d.lib;vtkIOXMLParser-9.5d.lib;vtkjpeg-9.5d.lib;vtkjsoncpp-9.5d.lib;vtkkissfft-9.5d.lib;vtklibharu-9.5d.lib;vtklibproj-9.5d.lib;vtklibxml2-9.5d.lib;vtkloguru-9.5d.lib;vtklz4-9.5d.lib;vtklzma-9.5d.lib;vtkmetaio-9.5d.lib;vtknetcdf-9.5d.lib;vtkogg-9.5d.lib;vtkParallelCore-9.5d.lib;vtkParallelDIY-9.5d.lib;vtkpng-9.5d.lib;vtkpugixml-9.5d.lib;vtkRenderingAnnotation-9.5d.lib;vtkRenderingCellGrid-9.5d.lib;vtkRenderingContext2D-9.5d.lib;vtkRenderingContextOpenGL2-9.5d.lib;vtkRenderingCore-9.5d.lib;vtkRenderingFreeType-9.5d.lib;vtkRenderingGL2PSOpenGL2-9.5d.lib;vtkRenderingGridAxes-9.5d.lib;vtkRenderingHyperTreeGrid-9.5d.lib;vtkRenderingImage-9.5d.lib;vtkRenderingLabel-9.5d.lib;vtkRenderingLICOpenGL2-9.5d.lib;vtkRenderingLOD-9.5d.lib;vtkRenderingOpenGL2-9.5d.lib;vtkRenderingQt-9.5d.lib;vtkRenderingSceneGraph-9.5d.lib;vtkRenderingUI-9.5d.lib;vtkRenderingVolume-9.5d.lib;vtkRenderingVolumeOpenGL2-9.5d.lib;vtkRenderingVtkJS-9.5d.lib;vtksqlite-9.5d.lib;vtksys-9.5d.lib;vtkTestingCore-9.5d.lib;vtkTestingRendering-9.5d.lib;vtktheora-9.5d.lib;vtktiff-9.5d.lib;vtktoken-9.5d.lib;vtkverdict-9.5d.lib;vtkViewsContext2D-9.5d.lib;vtkViewsCore-9.5d.lib;vtkViewsInfovis-9.5d.lib;vtkViewsQt-9.5d.lib;vtkWrappingTools-9.5d.lib;vtkzlib-9.5d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>E:\VTK\VTK-9.5.2-install\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PreprocessorDefinitions>_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>E:\VTK\VTK-9.5.2-install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vtkcgns-9.5d.lib;vtkChartsCore-9.5d.lib;vtkCommonColor-9.5d.lib;vtkCommonComputationalGeometry-9.5d.lib;vtkCommonCore-9.5d.lib;vtkCommonDataModel-9.5d.lib;vtkCommonExecutionModel-9.5d.lib;vtkCommonMath-9.5d.lib;vtkCommonMisc-9.5d.lib;vtkCommonSystem-9.5d.lib;vtkCommonTransforms-9.5d.lib;vtkDICOMParser-9.5d.lib;vtkDomainsChemistry-9.5d.lib;vtkDomainsChemistryOpenGL2-9.5d.lib;vtkdoubleconversion-9.5d.lib;vtkexodusII-9.5d.lib;vtkexpat-9.5d.lib;vtkFiltersAMR-9.5d.lib;vtkFiltersCellGrid-9.5d.lib;vtkFiltersCore-9.5d.lib;vtkFiltersExtraction-9.5d.lib;vtkFiltersFlowPaths-9.5d.lib;vtkFiltersGeneral-9.5d.lib;vtkFiltersGeneric-9.5d.lib;vtkFiltersGeometry-9.5d.lib;vtkFiltersGeometryPreview-9.5d.lib;vtkFiltersHybrid-9.5d.lib;vtkFiltersHyperTree-9.5d.lib;vtkFiltersImaging-9.5d.lib;vtkFiltersModeling-9.5d.lib;vtkFiltersParallel-9.5d.lib;vtkFiltersParallelImaging-9.5d.lib;vtkFiltersPoints-9.5d.lib;vtkFiltersProgrammable-9.5d.lib;vtkFiltersReduction-9.5d.lib;vtkFiltersSelection-9.5d.lib;vtkFiltersSMP-9.5d.lib;vtkFiltersSources-9.5d.lib;vtkFiltersStatistics-9.5d.lib;vtkFiltersTemporal-9.5d.lib;vtkFiltersTensor-9.5d.lib;vtkFiltersTexture-9.5d.lib;vtkFiltersTopology-9.5d.lib;vtkFiltersVerdict-9.5d.lib;vtkfmt-9.5d.lib;vtkfreetype-9.5d.lib;vtkGeovisCore-9.5d.lib;vtkgl2ps-9.5d.lib;vtkglad-9.5d.lib;vtkGUISupportQt-9.5d.lib;vtkGUISupportQtQuick-9.5d.lib;vtkGUISupportQtSQL-9.5d.lib;vtkhdf5_hl-9.5d.lib;vtkhdf5-9.5d.lib;vtkImagingColor-9.5d.lib;vtkImagingCore-9.5d.lib;vtkImagingFourier-9.5d.lib;vtkImagingGeneral-9.5d.lib;vtkImagingHybrid-9.5d.lib;vtkImagingMath-9.5d.lib;vtkImagingMorphological-9.5d.lib;vtkImagingSources-9.5d.lib;vtkImagingStatistics-9.5d.lib;vtkImagingStencil-9.5d.lib;vtkInfovisCore-9.5d.lib;vtkInfovisLayout-9.5d.lib;vtkInteractionImage-9.5d.lib;vtkInteractionStyle-9.5d.lib;vtkInteractionWidgets-9.5d.lib;vtkIOAMR-9.5d.lib;vtkIOAsynchronous-9.5d.lib;vtkIOCellGrid-9.5d.lib;vtkIOCesium3DTiles-9.5d.lib;vtkIOCGNSReader-9.5d.lib;vtkIOChemistry-9.5d.lib;vtkIOCityGML-9.5d.lib;vtkIOCONVERGECFD-9.5d.lib;vtkIOCore-9.5d.lib;vtkIOEngys-9.5d.lib;vtkIOEnSight-9.5d.lib;vtkIOERF-9.5d.lib;vtkIOExodus-9.5d.lib;vtkIOExport-9.5d.lib;vtkIOExportGL2PS-9.5d.lib;vtkIOExportPDF-9.5d.lib;vtkIOFDS-9.5d.lib;vtkIOFLUENTCFF-9.5d.lib;vtkIOGeometry-9.5d.lib;vtkIOHDF-9.5d.lib;vtkIOImage-9.5d.lib;vtkIOImport-9.5d.lib;vtkIOInfovis-9.5d.lib;vtkIOIOSS-9.5d.lib;vtkIOLANLX3D-9.5d.lib;vtkIOLegacy-9.5d.lib;vtkIOLSDyna-9.5d.lib;vtkIOMINC-9.5d.lib;vtkIOMotionFX-9.5d.lib;vtkIOMovie-9.5d.lib;vtkIONetCDF-9.5d.lib;vtkIOOggTheora-9.5d.lib;vtkIOParallel-9.5d.lib;vtkIOParallelXML-9.5d.lib;vtkIOPLY-9.5d.lib;vtkIOSegY-9.5d.lib;vtkIOSQL-9.5d.lib;vtkioss-9.5d.lib;vtkIOTecplotTable-9.5d.lib;vtkIOVeraOut-9.5d.lib;vtkIOVideo-9.5d.lib;vtkIOXML-9.5d.lib;vtkIOXMLParser-9.5d.lib;vtkjpeg-9.5d.lib;vtkjsoncpp-9.5d.lib;vtkkissfft-9.5d.lib;vtklibharu-9.5d.lib;vtklibproj-9.5d.lib;vtklibxml2-9.5d.lib;vtkloguru-9.5d.lib;vtklz4-9.5d.lib;vtklzma-9.5d.lib;vtkmetaio-9.5d.lib;vtknetcdf-9.5d.lib;vtkogg-9.5d.lib;vtkParallelCore-9.5d.lib;vtkParallelDIY-9.5d.lib;vtkpng-9.5d.lib;vtkpugixml-9.5d.lib;vtkRenderingAnnotation-9.5d.lib;vtkRenderingCellGrid-9.5d.lib;vtkRenderingContext2D-9.5d.lib;vtkRenderingContextOpenGL2-9.5d.lib;vtkRenderingCore-9.5d.lib;vtkRenderingFreeType-9.5d.lib;vtkRenderingGL2PSOpenGL2-9.5d.lib;vtkRenderingGridAxes-9.5d.lib;vtkRenderingHyperTreeGrid-9.5d.lib;vtkRenderingImage-9.5d.lib;vtkRenderingLabel-9.5d.lib;vtkRenderingLICOpenGL2-9.5d.lib;vtkRenderingLOD-9.5d.lib;vtkRenderingOpenGL2-9.5d.lib;vtkRenderingQt-9.5d.lib;vtkRenderingSceneGraph-9.5d.lib;vtkRenderingUI-9.5d.lib;vtkRenderingVolume-9.5d.lib;vtkRenderingVolumeOpenGL2-9.5d.lib;vtkRenderingVtkJS-9.5d.lib;vtksqlite-9.5d.lib;vtksys-9.5d.lib;vtkTestingCore-9.5d.lib;vtkTestingRendering-9.5d.lib;vtktheora-9.5d.lib;vtktiff-9.5d.lib;vtktoken-9.5d.lib;vtkverdict-9.5d.lib;vtkViewsContext2D-9.5d.lib;vtkViewsCore-9.5d.lib;vtkViewsInfovis-9.5d.lib;vtkViewsQt-9.5d.lib;vtkWrappingTools-9.5d.lib;vtkzlib-9.5d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="Configuration">
+    <ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AdvancedCurveStyler.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
+    <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="cube_of_pipeline.cpp" />
+    <ClCompile Include="CurvePlotWindow.cpp" />
+    <ClCompile Include="CylinderExample.cpp" />
+    <ClCompile Include="dicomReader.cpp" />
+    <ClCompile Include="DimensionPlane.cpp" />
+    <ClCompile Include="distancetotwopoint.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="MultiProcessController.cpp" />
+    <ClCompile Include="qcustomplot.cpp" />
+    <ClCompile Include="ReadDICOMSeries.cpp" />
+    <ClCompile Include="Reader.cpp" />
+    <ClCompile Include="ReaderHighSpeedDemo.cpp" />
+    <ClCompile Include="thread_pool.h" />
+    <ClCompile Include="TitleBar.cpp" />
+    <ClCompile Include="VTKWidget.cpp" />
+    <ClCompile Include="WindowControl.cpp" />
+    <QtRcc Include="QtWidgetsApplication1.qrc" />
+    <QtUic Include="QtWidgetsApplication1.ui" />
+    <QtMoc Include="QtWidgetsApplication1.h" />
+    <ClCompile Include="QtWidgetsApplication1.cpp" />
+    <ClCompile Include="main.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="DimensionPlane.h" />
+    <QtMoc Include="CurvePlotWindow.h" />
+    <ClInclude Include="MultiProcessController.h" />
+    <ClInclude Include="Reader.h" />
+    <ClInclude Include="SafeQueue.h" />
+    <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="vtkCharConvCompatibility.h" />
+    <ClInclude Include="vtkStringScanner.h" />
+    <QtMoc Include="VTKWidget.h" />
+    <ClInclude Include="vtk_scn.h" />
+    <ClInclude Include="WindowControl.h" />
+    <QtMoc Include="TitleBar.h" />
+    <QtMoc Include="BaseWindow.h" />
+    <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
+    <QtMoc Include="qcustomplot.h" />
+    <QtMoc Include="AdvancedCurveStyler.h" />
+    <ClInclude Include="CylinderExample.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="QtWidgetsApplication1.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
