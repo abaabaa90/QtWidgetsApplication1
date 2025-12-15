@@ -1,4 +1,4 @@
-//¶ÔÓÚ´°¿Ú»ùÀàÎÒĞèÒªÎªËûÃÇÌá¹©Ò»¸öÍ³Ò»µÄ»ù´¡ÑùÊ½,±ÈÈçËµÉèÖÃËüµÄÒ»Ğ©»ù±¾×é¼ş£¬ÉèÖÃ´°¿ÚµÄ±³¾°É«¶¼ÊÇÍ³Ò»µÄ
+//ï¿½ï¿½ï¿½Ú´ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÎªï¿½ï¿½ï¿½ï¿½ï¿½á¹©Ò»ï¿½ï¿½Í³Ò»ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Ê½,ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ğ©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ÚµÄ±ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½Í³Ò»ï¿½ï¿½
 #pragma once
 #include "pch.h"
 #include <QWidget>
@@ -11,71 +11,71 @@ public:
     explicit BaseWindow(QWidget* parent = nullptr, bool showCloseButton = true);
     virtual ~BaseWindow();
 
-    // ÉèÖÃ´°¿Ú±êÌâ
+    // ï¿½ï¿½ï¿½Ã´ï¿½ï¿½Ú±ï¿½ï¿½ï¿½
     void setWindowTitle(const QString& title);
 
-    // ÉèÖÃ´°¿Ú´óĞ¡
+    // ï¿½ï¿½ï¿½Ã´ï¿½ï¿½Ú´ï¿½Ğ¡
     void setWindowSize(int width, int height);
     void setWindowSize(const QSize& size);
 
-    // ÉèÖÃ¹Ì¶¨´óĞ¡
+    // ï¿½ï¿½ï¿½Ã¹Ì¶ï¿½ï¿½ï¿½Ğ¡
     void setFixedWindowSize(int width, int height);
     void setFixedWindowSize(const QSize& size);
 
-    // ÉèÖÃ×îĞ¡/×î´ó³ß´ç
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡/ï¿½ï¿½ï¿½ß´ï¿½
     void setMinimumWindowSize(int width, int height);
     void setMaximumWindowSize(int width, int height);
 
-    // ÉèÖÃ±³¾°ÑÕÉ«
+    // ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½É«
     void setBackgroundColor(const QColor& color);
 
-    // ÉèÖÃ´°¿ÚÔ²½Ç
+    // ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½Ô²ï¿½ï¿½
     void setWindowRadius(int radius);
 
-    // ÉèÖÃ´°¿ÚÒõÓ°
+    // ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½Ó°
     void setWindowShadow(bool enabled, int blurRadius = 10);
 
-    // ÉèÖÃ±êÌâÀ¸ÑùÊ½
+    // ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
     void setTitleBarVisible(bool visible);
     void setTitleBarHeight(int height);
     void setTitleBarColor(const QColor& color);
 
-    // ÉèÖÃÄÚÈİÇøÓò±ß¾à
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¾ï¿½
     void setContentMargins(int left, int top, int right, int bottom);
 
-    // ´°¿ÚÏÔÊ¾Ïà¹Ø
-    void showCentered();  // ¾ÓÖĞÏÔÊ¾
-    void showMaximized(); // ×î´ó»¯ÏÔÊ¾
-    void showMinimized(); // ×îĞ¡»¯ÏÔÊ¾
-    void showNormal();    // Õı³£ÏÔÊ¾
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½
+    void showCentered();  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
+    void showMaximized(); // ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
+    void showMinimized(); // ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½Ê¾
+    void showNormal();    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
 
-    // »ñÈ¡ÄÚÈİÇøÓòwidget£¨×ÓÀà¿ÉÒÔÔÚÕâÀïÌí¼ÓÄÚÈİ£©
+    // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½widgetï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½
     QWidget* contentWidget() const;
 
 protected:
-    // ×ÓÀà¿ÉÒÔÖØĞ´ÕâĞ©·½·¨À´×Ô¶¨ÒåÑùÊ½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½Ğ©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
     virtual void initUI();
     virtual void initStyle();
     virtual void initConnections();
 
-    // ÊÂ¼şÖØĞ´
+    // ï¿½Â¼ï¿½ï¿½ï¿½Ğ´
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void resizeEvent(QResizeEvent* event) override;
 
-    // ×ÓÀà¿ÉÒÔ·ÃÎÊµÄ³ÉÔ±
-    QWidget* m_titleBar;           // ±êÌâÀ¸
-    QWidget* m_contentWidget;      // ÄÚÈİÇøÓò
-    QLabel* m_titleLabel;          // ±êÌâ±êÇ©
-    QPushButton* m_closeButton;    // ¹Ø±Õ°´Å¥
-    QPushButton* m_minButton;      // ×îĞ¡»¯°´Å¥
-    QPushButton* m_maxButton;      // ×î´ó»¯°´Å¥
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ÊµÄ³ï¿½Ô±
+    QWidget* m_titleBar;           // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    QWidget* m_contentWidget;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    QLabel* m_titleLabel;          // ï¿½ï¿½ï¿½ï¿½ï¿½Ç©
+    QPushButton* m_closeButton;    // ï¿½Ø±Õ°ï¿½Å¥
+    QPushButton* m_minButton;      // ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½Å¥
+    QPushButton* m_maxButton;      // ï¿½ï¿½ó»¯°ï¿½Å¥
 
-    QVBoxLayout* m_mainLayout;     // Ö÷²¼¾Ö
-    QHBoxLayout* m_titleLayout;    // ±êÌâÀ¸²¼¾Ö
-    QVBoxLayout* m_contentLayout;  // ÄÚÈİ²¼¾Ö
+    QVBoxLayout* m_mainLayout;     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    QHBoxLayout* m_titleLayout;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    QVBoxLayout* m_contentLayout;  // ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½
 
 private slots:
     void onCloseClicked();
@@ -83,17 +83,17 @@ private slots:
     void onMaxClicked();
 
 private:
-    // ³õÊ¼»¯·½·¨
+    // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void initMembers();
     void setupLayout();
     void setupTitleBar();
     void setupContentArea();
 
-    // ´°¿ÚÍÏ¶¯Ïà¹Ø
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½
     bool m_isDragging;
     QPoint m_dragStartPosition;
 
-    // ÑùÊ½Ïà¹Ø
+    // ï¿½ï¿½Ê½ï¿½ï¿½ï¿½
     QColor m_backgroundColor;
     QColor m_titleBarColor;
     int m_windowRadius;
@@ -104,7 +104,7 @@ private:
     bool m_isMaximized;
     QRect m_normalGeometry;
 
-    // Ë½ÓĞ·½·¨
+    // Ë½ï¿½Ğ·ï¿½ï¿½ï¿½
     void updateWindowStyle();
     void drawWindowShadow(QPainter& painter);
     void drawRoundedRect(QPainter& painter, const QRect& rect, int radius);

@@ -1,7 +1,7 @@
 #include "VtkRenderWidget.h"
 #include <QVBoxLayout>
 
-// VTKÍ·ÎÄ¼þ
+// VTKÍ·ï¿½Ä¼ï¿½
 #include <vtkConeSource.h>
 #include <vtkSphereSource.h>
 #include <vtkCylinderSource.h>
@@ -21,31 +21,31 @@
 
 
 
-// ÖÇÄÜÖ¸Õë
+// ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
 #include <vtkSmartPointer.h>
 
 VtkRenderWidget::VtkRenderWidget(QWidget* parent)
     : QWidget(parent)
     , m_initialized(false)
 {
-    // ´´½¨²¼¾Ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    // ´´½¨VTK OpenGL²¿¼þ
+    // ï¿½ï¿½ï¿½ï¿½VTK OpenGLï¿½ï¿½ï¿½ï¿½
     m_vtkWidget = new QVTKOpenGLNativeWidget(this);
     layout->addWidget(m_vtkWidget);
 
-    // ÉèÖÃ´óÐ¡²ßÂÔ
+    // ï¿½ï¿½ï¿½Ã´ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    // ³õÊ¼»¯VTK
+    // ï¿½ï¿½Ê¼ï¿½ï¿½VTK
     initializeVtk();
 }
 
 VtkRenderWidget::~VtkRenderWidget()
 {
-    // VTKÖÇÄÜÖ¸Õë»á×Ô¶¯¹ÜÀíÄÚ´æ£¬ÎÒÃÇÖ»ÐèÒªÉ¾³ýQt²¿¼þ
+    // VTKï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´æ£¬ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ÒªÉ¾ï¿½ï¿½Qtï¿½ï¿½ï¿½ï¿½
     delete m_vtkWidget;
 }
 
@@ -53,33 +53,33 @@ void VtkRenderWidget::initializeVtk()
 {
     if (m_initialized) return;
 
-    // »ñÈ¡»ò´´½¨äÖÈ¾Æ÷
+    // ï¿½ï¿½È¡ï¿½ò´´½ï¿½ï¿½ï¿½È¾ï¿½ï¿½
     m_renderer = vtkRenderer::New();
-    m_renderer->SetBackground(0.1, 0.2, 0.4);  // ÉîÀ¶É«±³¾°
+    m_renderer->SetBackground(0.1, 0.2, 0.4);  // ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
 
-    // ÉèÖÃäÖÈ¾´°¿Ú
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
     m_vtkWidget->renderWindow()->AddRenderer(m_renderer);
 
-    // Ìí¼Ó¹âÔ´
+    // ï¿½ï¿½Ó¹ï¿½Ô´
     addLights();
 
-    // ´´½¨Ä¬ÈÏ³¡¾°
+    // ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï³ï¿½ï¿½ï¿½
     createDefaultScene();
 
-    // ÉèÖÃ½»»¥Æ÷ÑùÊ½£¨¸ú×ÙÇòÏà»ú£©
+    // ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     vtkSmartPointer<vtkInteractorStyleTrackballCamera> style =
         vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
     m_vtkWidget->interactor()->SetInteractorStyle(style);
 
     m_initialized = true;
 
-    // ³õÊ¼äÖÈ¾
+    // ï¿½ï¿½Ê¼ï¿½ï¿½È¾
     m_vtkWidget->renderWindow()->Render();
 }
 
 void VtkRenderWidget::addLights()
 {
-    // Ìí¼ÓÖ÷¹âÔ´
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
     vtkSmartPointer<vtkLight> light1 = vtkSmartPointer<vtkLight>::New();
     light1->SetLightTypeToSceneLight();
     light1->SetPosition(1, 1, 1);
@@ -88,7 +88,7 @@ void VtkRenderWidget::addLights()
     light1->SetIntensity(0.8);
     m_renderer->AddLight(light1);
 
-    // Ìí¼Ó¸¨Öú¹âÔ´
+    // ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
     vtkSmartPointer<vtkLight> light2 = vtkSmartPointer<vtkLight>::New();
     light2->SetLightTypeToSceneLight();
     light2->SetPosition(-1, -1, 1);
@@ -100,7 +100,7 @@ void VtkRenderWidget::addLights()
 
 void VtkRenderWidget::createDefaultScene()
 {
-    // Ä¬ÈÏÌí¼ÓÒ»¸öÔ²×¶Ìå¡¢Ò»¸öÇòÌå¡¢Ò»¸öÔ²ÖùÌå
+    // Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ô²×¶ï¿½å¡¢Ò»ï¿½ï¿½ï¿½ï¿½ï¿½å¡¢Ò»ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½
     double red[] = { 1.0, 0.0, 0.0 };
     double green[] = { 0.0, 1.0, 0.0 };
     double blue[] = { 0.0, 0.5, 1.0 };
@@ -119,17 +119,17 @@ vtkActor* VtkRenderWidget::createActor(vtkPolyDataMapper* mapper, const double c
     vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
     actor->SetMapper(mapper);
 
-    // ÉèÖÃÑÕÉ«
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
     if (color) {
         actor->GetProperty()->SetColor(color[0], color[1], color[2]);
     }
 
-    // ÉèÖÃÎ»ÖÃ
+    // ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
     if (position) {
         actor->SetPosition(position[0], position[1], position[2]);
     }
 
-    // ÉèÖÃ²ÄÖÊÊôÐÔ
+    // ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     actor->GetProperty()->SetAmbient(0.3);
     actor->GetProperty()->SetDiffuse(0.7);
     actor->GetProperty()->SetSpecular(0.5);
@@ -207,13 +207,13 @@ vtkRenderer* VtkRenderWidget::getRenderer()
 
 void VtkRenderWidget::showAxes(bool show)
 {
-    // ÕâÀï¿ÉÒÔÌí¼Ó×ø±êÖáÏÔÊ¾Âß¼­
-    // ÓÉÓÚ´úÂë³¤¶ÈÏÞÖÆ£¬ÕâÀïÖ»Ìá¹©½Ó¿Ú
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ß¼ï¿½
+    // ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ë³¤ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½á¹©ï¿½Ó¿ï¿½
     m_vtkWidget->renderWindow()->Render();
 }
 
 void VtkRenderWidget::setInteractionMode(int mode)
 {
-    // ÕâÀï¿ÉÒÔÉèÖÃ²»Í¬µÄ½»»¥Ä£Ê½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã²ï¿½Í¬ï¿½Ä½ï¿½ï¿½ï¿½Ä£Ê½
     m_vtkWidget->renderWindow()->Render();
 }

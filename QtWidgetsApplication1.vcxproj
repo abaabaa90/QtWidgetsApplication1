@@ -73,8 +73,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <AdditionalOptions>/utf-8</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>E:\VTK\VTK-9.5.2-install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -91,8 +90,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PreprocessorDefinitions>_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <AdditionalOptions>/utf-8</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>E:\VTK\VTK-9.5.2-install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -128,16 +126,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AdvancedCurveStyler.cpp">
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
-      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
-      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
-    </ClCompile>
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="cube_of_pipeline.cpp" />
     <ClCompile Include="CurvePlotWindow.cpp" />
-    <ClCompile Include="CylinderExample.cpp" />
     <ClCompile Include="dicomReader.cpp" />
     <ClCompile Include="DimensionPlane.cpp" />
     <ClCompile Include="distancetotwopoint.cpp" />
@@ -180,8 +171,6 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="qcustomplot.h" />
-    <QtMoc Include="AdvancedCurveStyler.h" />
-    <ClInclude Include="CylinderExample.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="QtWidgetsApplication1.rc" />

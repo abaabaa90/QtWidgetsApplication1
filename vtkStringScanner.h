@@ -2,15 +2,15 @@
 //// SPDX-License-Identifier: BSD-3-Clause
 ///**
 // * @file   vtkStringScanner.h
-// * @brief  ÓÅ»¯µÄC++¹¤¾ß£¬ÓÃÓÚ´Ó×Ö·û´®ºÍÎÄ¼þÖÐÉ¨ÃèÖµ¡£
+// * @brief  ï¿½Å»ï¿½ï¿½ï¿½C++ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½É¨ï¿½ï¿½Öµï¿½ï¿½
 // *
-// * Õâ¸öÍ·ÎÄ¼þÌá¹©ÁË¸ßÐ§µÄ¡¢Ìæ´ú³£¼ûC/C++×Ö·û´®´¦Àíº¯Êý£¨Èç`scanf`¡¢`atoi`µÈ£©µÄ¹¤¾ß¡£
+// * ï¿½ï¿½ï¿½Í·ï¿½Ä¼ï¿½ï¿½á¹©ï¿½Ë¸ï¿½Ð§ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½C/C++ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`scanf`ï¿½ï¿½`atoi`ï¿½È£ï¿½ï¿½Ä¹ï¿½ï¿½ß¡ï¿½
 // *
-// * Ëü°üº¬½«×Ö·û´®×ª»»ÎªÊý×ÖÒÔ¼°´Ó×Ö·û´®ºÍÎÄ¼þÉ¨ÃèÖµµÄÊµÓÃ¹¤¾ß¡£
+// * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½É¨ï¿½ï¿½Öµï¿½ï¿½Êµï¿½Ã¹ï¿½ï¿½ß¡ï¿½
 // *
-// * Çë²Î¿¼ÎÄµµÒÔ»ñÈ¡ÓÐ¹ØÈçºÎÊ¹ÓÃÕâÀïÌá¹©µÄÏÖ´ú¡¢ÀàÐÍ°²È«¶ÔÓ¦º¯ÊýÌæ»»±ê×¼Cº¯ÊýµÄÖ¸µ¼¡£
+// * ï¿½ï¿½Î¿ï¿½ï¿½Äµï¿½ï¿½Ô»ï¿½È¡ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½È«ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½æ»»ï¿½ï¿½×¼Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½
 // *
-// * 1. C/C++ÓÐÒÔÏÂº¯Êý¿ÉÒÔ½«Ò»¸ö/¶à¸öchar*»òstring×ª»»ÎªÊý×Ö£º
+// * 1. C/C++ï¿½ï¿½ï¿½ï¿½ï¿½Âºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½Ò»ï¿½ï¿½/ï¿½ï¿½ï¿½char*ï¿½ï¿½string×ªï¿½ï¿½Îªï¿½ï¿½ï¿½Ö£ï¿½
 // *    1. atof, atoi, atol, atoll,
 // *    2. std::stof, std::stod, std::stold, std::stoi, std::stol, std::stoll, std::stoul, std::stoull
 // *    3. strtof, strtod, strtold, strtol, strtoll/_strtoi64, strtoul, strtoull
@@ -18,17 +18,17 @@
 // *    5. strptime
 // *    6. std::from_chars
 // *    7. std::get_time
-// * ÕâÐ©º¯ÊýÓ¦¸Ã±»Ìæ»»Îª£º
-// *    1. vtk::from_chars, vtk::scan_int, vtk::scan_value, Èç¹ûÐèÒª×ª»»Ò»¸öÊý×Ö
-// *    2. vtk::scan, Èç¹ûÐèÒª×ª»»Ò»¸ö/¶à¸öÊý×Ö£¨¿ÉÑ¡Ê¹ÓÃÌØ¶¨¸ñÊ½£©
+// * ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã±ï¿½ï¿½æ»»Îªï¿½ï¿½
+// *    1. vtk::from_chars, vtk::scan_int, vtk::scan_value, ï¿½ï¿½ï¿½ï¿½ï¿½Òª×ªï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// *    2. vtk::scan, ï¿½ï¿½ï¿½ï¿½ï¿½Òª×ªï¿½ï¿½Ò»ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½Ñ¡Ê¹ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½Ê½ï¿½ï¿½
 // *
-// * 2. C/C++ÓÐÒÔÏÂº¯Êý´Óstdin/ÎÄ¼þÉ¨ÃèÒ»¸ö/¶à¸öÊý×Ö£º
+// * 2. C/C++ï¿½ï¿½ï¿½ï¿½ï¿½Âºï¿½ï¿½ï¿½ï¿½ï¿½stdin/ï¿½Ä¼ï¿½É¨ï¿½ï¿½Ò»ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½
 // *    1. scanf, scanf_s, vscanf, vscanf_s,
 // *    2. fscanf, fscanf_s, vfscanf, vfscanf_s,
 // *    3. std::cin, std::ifstream, vtksys::ifstream
-// * ÕâÐ©º¯ÊýÓ¦¸Ã±»Ìæ»»Îª£º
-// *    1. vtk::scan_value, Èç¹ûÐèÒª×ª»»Ò»¸öÊý×Ö
-// *    2. vtk::input, vtk::scan, Èç¹ûÐèÒª×ª»»Ò»¸ö/¶à¸öÊý×Ö£¨¿ÉÑ¡Ê¹ÓÃÌØ¶¨¸ñÊ½£©
+// * ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã±ï¿½ï¿½æ»»Îªï¿½ï¿½
+// *    1. vtk::scan_value, ï¿½ï¿½ï¿½ï¿½ï¿½Òª×ªï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// *    2. vtk::input, vtk::scan, ï¿½ï¿½ï¿½ï¿½ï¿½Òª×ªï¿½ï¿½Ò»ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½Ñ¡Ê¹ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½Ê½ï¿½ï¿½
 // */
 //#ifndef vtkStringScanner_h
 //#define vtkStringScanner_h
@@ -62,7 +62,7 @@
 //    VTK_ALWAYS_INLINE auto from_chars(const char* first, const char* last, T& value,
 //        std::chars_format format = std::chars_format::general) -> std::from_chars_result
 //    {
-//        static constexpr std::array<fast_float::chars_format, 5> std_to_fast_float_chars_format = { {//¾²Ì¬³£Á¿Êý×éÓÃÓÚ¸ñÊ½Ó³Éä
+//        static constexpr std::array<fast_float::chars_format, 5> std_to_fast_float_chars_format = { {//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½Ê½Ó³ï¿½ï¿½
 //          fast_float::chars_format::general,    // 0: Default general
 //          fast_float::chars_format::scientific, // 1: scientific
 //          fast_float::chars_format::fixed,      // 2: fixed
@@ -129,7 +129,7 @@
 //#define VTK_FROM_CHARS_RESULT_IF_ERROR_RETURN(from_chars_result, value, returnValue)               \
 //  VTK_FROM_CHARS_RESULT_IF_ERROR_COMMAND(from_chars_result, value, return returnValue)
 //
-//// Helper for token©\pasting
+//// Helper for tokenï¿½\pasting
 //#define VTK_FROM_CHARS_CONCAT_INNER(a, b) a##b
 //#define VTK_FROM_CHARS_CONCAT(a, b) VTK_FROM_CHARS_CONCAT_INNER(a, b)
 //

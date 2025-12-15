@@ -7,19 +7,19 @@ TitleBar::TitleBar(QWidget* parent) : QWidget(parent)
     HMainLayout->setSpacing(0);
     HMainLayout->setContentsMargins(0, 0, 0, 0);
 
-    // ´´½¨°´Å¥²¢±£´æµ½ÈÝÆ÷ÖÐ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½æµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     for (int i = 0; i < TitleBarContent.size(); i++) {
         QPushButton* btn = new QPushButton(TitleBarContent[i]);
-        btn->setCheckable(true);  // ÉèÖÃÎª¿ÉÑ¡ÖÐ
+        btn->setCheckable(true);  // ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ñ¡ï¿½ï¿½
         btn->setStyleSheet(buttonStyle);
 
-        // Èç¹ûÊÇµÚÒ»¸ö°´Å¥£¬Ä¬ÈÏÑ¡ÖÐ
+        // ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½Ä¬ï¿½ï¿½Ñ¡ï¿½ï¿½
         if (i == 0) {btn->setChecked(true);currentCheckedBtnIdx = 0;}
 
         HMainLayout->addWidget(btn);
-        btnList.append(btn);  // ±£´æ°´Å¥Ö¸Õë
+        btnList.append(btn);  // ï¿½ï¿½ï¿½æ°´Å¥Ö¸ï¿½ï¿½
 
-        // Á¬½Óµã»÷ÐÅºÅ£¬Ê¹ÓÃlambda²¶»ñ°´Å¥Ë÷Òý
+        // ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ÅºÅ£ï¿½Ê¹ï¿½ï¿½lambdaï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½
         connect(btn, &QPushButton::clicked, [this, i]() {
             this->SetStatus(i);
             });
@@ -31,27 +31,27 @@ TitleBar::TitleBar(QWidget* parent) : QWidget(parent)
 
 void TitleBar::SetStatus(int idx)
 {
-    // Èç¹ûµã»÷µÄÊÇÒÑ¾­Ñ¡ÖÐµÄ°´Å¥£¬Ö±½Ó·µ»Ø
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½Ñ¡ï¿½ÐµÄ°ï¿½Å¥ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½
     if (idx == currentCheckedBtnIdx) {
         return;
     }
 
-    // È¡ÏûÖ®Ç°Ñ¡ÖÐ°´Å¥µÄ×´Ì¬
+    // È¡ï¿½ï¿½Ö®Ç°Ñ¡ï¿½Ð°ï¿½Å¥ï¿½ï¿½×´Ì¬
     if (currentCheckedBtnIdx >= 0 && currentCheckedBtnIdx < btnList.size()) {
         btnList[currentCheckedBtnIdx]->setChecked(false);
     }
 
-    // ÉèÖÃÐÂÑ¡ÖÐ°´Å¥µÄ×´Ì¬
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½Ð°ï¿½Å¥ï¿½ï¿½×´Ì¬
     if (idx >= 0 && idx < btnList.size()) {
         btnList[idx]->setChecked(true);
         currentCheckedBtnIdx = idx;
 
-        // ¿ÉÒÔÔÚÕâÀï·¢ÉäÐÅºÅ£¬Í¨ÖªÆäËû×é¼þÄÄ¸ö°´Å¥±»Ñ¡ÖÐÁË
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï·¢ï¿½ï¿½ï¿½ÅºÅ£ï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½Å¥ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½
         // emit buttonSelected(idx);
     }
 }
 
 TitleBar::~TitleBar()
 {
-    // ²»ÐèÒªÊÖ¶¯É¾³ý×Ó²¿¼þ£¬QtµÄ¸¸×Ó¶ÔÏó»úÖÆ»á×Ô¶¯´¦Àí
+    // ï¿½ï¿½ï¿½ï¿½Òªï¿½Ö¶ï¿½É¾ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Qtï¿½Ä¸ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½Æ»ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
 }

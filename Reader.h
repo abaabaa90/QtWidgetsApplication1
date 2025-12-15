@@ -9,35 +9,35 @@ public:
     Reader();
     ~Reader();
 
-    // ¶ÁÈ¡ÎÄ¼þ
+    // ï¿½ï¿½È¡ï¿½Ä¼ï¿½
     bool ReadFile(const char* fileName);
-    // Çå¿Õµ±Ç°Êý¾Ý
+    // ï¿½ï¿½Õµï¿½Ç°ï¿½ï¿½ï¿½ï¿½
     void Clear();
 
-    // »ñÈ¡Í³¼ÆÐÅÏ¢
+    // ï¿½ï¿½È¡Í³ï¿½ï¿½ï¿½ï¿½Ï¢
     size_t GetPointCount() const { return Points.size(); }
     size_t GetDimension() const { return Variables.size(); }
-    // Êý¾Ý´æ´¢
+    // ï¿½ï¿½ï¿½Ý´æ´¢
     std::string DataTitle;
     std::vector<std::string> Variables;
     std::vector < std::vector<double >> Points;
 private:
-    // ÄÚ²¿½âÎö·½·¨
+    // ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     bool ParseHeader();
     bool ParseData();
     std::string GetNextToken();
 
-    // ÎÄ¼þ¶ÁÈ¡Ïà¹Ø³ÉÔ±±äÁ¿£¨°´ÕÕÄãÌá¹©µÄGetNextTokenº¯ÊýÐèÒª£©
+    // ï¿½Ä¼ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ø³ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ï¿½GetNextTokenï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½
     std::string TokenBackup;
     char TheNextChar;
     bool NextCharEOF;
     bool NextCharEOL;
     bool NextCharValid;
     bool TokenIsString;
-    // ÎÄ¼þÁ÷£¨Ê¹ÓÃÖÇÄÜÖ¸Õë¹ÜÀí£©
+    // ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     std::unique_ptr<FILE, decltype(&fclose)> FileStream;
 
-    // ½ûÓÃ¿½±´
+    // ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½
     Reader(const Reader&) = delete;
     Reader& operator=(const Reader&) = delete;
 };

@@ -8,37 +8,37 @@
 
 namespace fs = std::filesystem;
 
-// ¸ßÐÔÄÜÎÄ¼þ¶ÁÈ¡Æ÷
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½È¡ï¿½ï¿½
 class HighPerformanceFileReader {
 private:
     ThreadPool& m_threadPool;
-    const size_t m_blockSize;  // Ã¿¸öÏß³Ì´¦ÀíµÄ¿é´óÐ¡
+    const size_t m_blockSize;  // Ã¿ï¿½ï¿½ï¿½ß³Ì´ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½Ð¡
 
 public:
-    // ¹¹Ôìº¯Êý£ºÏß³Ì³ØÒýÓÃ + ¿é´óÐ¡£¨Ä¬ÈÏ8MB£¬¿É¸ù¾ÝÏµÍ³µ÷Õû£©
+    // ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¬ï¿½ï¿½8MBï¿½ï¿½ï¿½É¸ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     HighPerformanceFileReader(ThreadPool& threadPool, size_t blockSize = 8 * 1024 * 1024)
         : m_threadPool(threadPool), m_blockSize(blockSize) {}
 
-    // ¶ÁÈ¡ÎÄ¼þµ½ÄÚ´æ£¬·µ»ØÍêÕûÊý¾Ý
+    // ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ú´æ£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     std::vector<char> readFile(const std::string& filePath) {
-        // »ñÈ¡ÎÄ¼þ´óÐ¡
+        // ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡
         const auto fileSize = fs::file_size(filePath);
         if (fileSize == 0) {
             return {};
         }
 
-        // ¼ÆËãÐèÒªµÄ¿éÊý
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ä¿ï¿½ï¿½ï¿½
         const size_t blockCount = (fileSize + m_blockSize - 1) / m_blockSize;
-        std::vector<char> result(fileSize);  // Ô¤·ÖÅä×ã¹»ÄÚ´æ
+        std::vector<char> result(fileSize);  // Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ã¹»ï¿½Ú´ï¿½
         std::vector<std::future<void>> futures;
         futures.reserve(blockCount);
 
-        // Ìá½»ËùÓÐ¶ÁÈ¡ÈÎÎñ
+        // ï¿½á½»ï¿½ï¿½ï¿½Ð¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½
         for (size_t i = 0; i < blockCount; ++i) {
             const size_t offset = i * m_blockSize;
             const size_t currentBlockSize = std::min(m_blockSize, fileSize - offset);
 
-            // Ìá½»ÈÎÎñµ½Ïß³Ì³Ø
+            // ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½
             futures.emplace_back(m_threadPool.submit(
                 &HighPerformanceFileReader::readBlock,
                 filePath,
@@ -48,72 +48,72 @@ public:
             ));
         }
 
-        // µÈ´ýËùÓÐÈÎÎñÍê³É
+        // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         for (auto& future : futures) {
-            future.get();  // »áÅ×³öÒì³££¬Èç¹û¶ÁÈ¡Ê§°Ü
+            future.get();  // ï¿½ï¿½ï¿½×³ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Ê§ï¿½ï¿½
         }
 
         return result;
     }
 
 private:
-    // ¾²Ì¬·½·¨£º¶ÁÈ¡ÎÄ¼þµÄÒ»¿éÊý¾Ý
+    // ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     static void readBlock(const std::string& filePath, size_t offset, size_t size, char* dest) {
-        // ÒÔ¶þ½øÖÆÄ£Ê½´ò¿ªÎÄ¼þ£¬½ûÓÃÁ÷Í¬²½ÒÔÌá¸ßÐÔÄÜ
+        // ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         std::ifstream file(filePath, std::ios::binary | std::ios::ate);
         if (!file.is_open()) {
-            throw std::runtime_error("ÎÞ·¨´ò¿ªÎÄ¼þ: " + filePath);
+            throw std::runtime_error("ï¿½Þ·ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½: " + filePath);
         }
 
-        // ÉèÖÃÎÄ¼þ»º³åÇø´óÐ¡£¨Ê¹ÓÃ½Ï´óµÄ»º³åÇø¼õÉÙIO²Ù×÷£©
-        const size_t bufferSize = 1 * 1024 * 1024;  // 1MB»º³åÇø
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ê¹ï¿½Ã½Ï´ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IOï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        const size_t bufferSize = 1 * 1024 * 1024;  // 1MBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         std::vector<char> buffer(bufferSize);
         file.rdbuf()->pubsetbuf(buffer.data(), bufferSize);
 
-        // ¶¨Î»µ½Òª¶ÁÈ¡µÄÎ»ÖÃ
+        // ï¿½ï¿½Î»ï¿½ï¿½Òªï¿½ï¿½È¡ï¿½ï¿½Î»ï¿½ï¿½
         file.seekg(offset);
 
-        // ¶ÁÈ¡Êý¾Ý
+        // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
         file.read(dest, size);
 
-        // ¼ì²é¶ÁÈ¡ÊÇ·ñ³É¹¦
+        // ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ç·ï¿½É¹ï¿½
         if (!file) {
-            throw std::runtime_error("ÎÄ¼þ¶ÁÈ¡Ê§°Ü: " + filePath +
+            throw std::runtime_error("ï¿½Ä¼ï¿½ï¿½ï¿½È¡Ê§ï¿½ï¿½: " + filePath +
                 " (offset: " + std::to_string(offset) + ", size: " + std::to_string(size) + ")");
         }
     }
 };
 
-//// Ê¹ÓÃÊ¾Àý
+//// Ê¹ï¿½ï¿½Ê¾ï¿½ï¿½
 //int man___() {
 //    try {
-//        // ¸ù¾ÝCPUºËÐÄÊý´´½¨Ïß³Ì³Ø£¨Í¨³£ÉèÖÃÎªºËÐÄÊý»òºËÐÄÊý*2£©
+//        // ï¿½ï¿½ï¿½ï¿½CPUï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì³Ø£ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*2ï¿½ï¿½
 //        const size_t threadCount = std::thread::hardware_concurrency();
 //        ThreadPool threadPool(threadCount);
 //        threadPool.init();
 //
-//        HighPerformanceFileReader reader(threadPool, 16 * 1024 * 1024);  // 16MB¿é´óÐ¡
+//        HighPerformanceFileReader reader(threadPool, 16 * 1024 * 1024);  // 16MBï¿½ï¿½ï¿½Ð¡
 //
-//        const std::string filePath = "large_file.bin";  // Ìæ»»ÎªÄãµÄ´óÎÄ¼þÂ·¾¶
+//        const std::string filePath = "large_file.bin";  // ï¿½æ»»Îªï¿½ï¿½Ä´ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½
 //
-//        // ¼ÆÊ±
+//        // ï¿½ï¿½Ê±
 //        auto start = std::chrono::high_resolution_clock::now();
 //
-//        // ¶ÁÈ¡ÎÄ¼þ
+//        // ï¿½ï¿½È¡ï¿½Ä¼ï¿½
 //        auto data = reader.readFile(filePath);
 //
 //        auto end = std::chrono::high_resolution_clock::now();
 //        std::chrono::duration<double> elapsed = end - start;
 //
-//        // Êä³ö½á¹û
-//        std::cout << "ÎÄ¼þ´óÐ¡: " << data.size() / (1024 * 1024) << " MB\n";
-//        std::cout << "¶ÁÈ¡Ê±¼ä: " << elapsed.count() << " Ãë\n";
-//        std::cout << "¶ÁÈ¡ËÙ¶È: " << (data.size() / (1024 * 1024)) / elapsed.count() << " MB/s\n";
+//        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//        std::cout << "ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡: " << data.size() / (1024 * 1024) << " MB\n";
+//        std::cout << "ï¿½ï¿½È¡Ê±ï¿½ï¿½: " << elapsed.count() << " ï¿½ï¿½\n";
+//        std::cout << "ï¿½ï¿½È¡ï¿½Ù¶ï¿½: " << (data.size() / (1024 * 1024)) / elapsed.count() << " MB/s\n";
 //
 //        threadPool.shutdown();
 //    }
 //    catch (const std::exception& e) {
-//        std::cerr << "´íÎó: " << e.what() << std::endl;
+//        std::cerr << "ï¿½ï¿½ï¿½ï¿½: " << e.what() << std::endl;
 //        return 1;
 //    }
 //

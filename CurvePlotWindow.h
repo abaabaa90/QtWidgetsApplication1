@@ -7,7 +7,7 @@
 #include "qcustomplot.h"
 #include <iostream>
 #pragma execution_character_set("utf-8")
-// Ç°ÏòÉùÃ÷
+// Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 class Reader;
 QT_BEGIN_NAMESPACE
 class QPushButton;
@@ -24,21 +24,21 @@ public:
     ~CurvePlotWindow();
 
 private slots:
-    // °´Å¥µã»÷²Ûº¯Êý
+    // ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Ûºï¿½ï¿½ï¿½
     void onLoadSingleFile();
     void onLoadMultipleFiles();
     void onClearPlot();
     void onSavePlot();
 
-    // ×ø±êÖáÑ¡Ôñ²Ûº¯Êý
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ûºï¿½ï¿½ï¿½
     void onXAxisChanged(int index);
     void onYAxisChanged(int index);
 
-    // Í¼±í½»»¥
+    // Í¼ï¿½ï¿½ï¿½ï¿½ï¿½
     void onMouseMove(QMouseEvent* event);
 
 private:
-    // UI¿Ø¼þ
+    // UIï¿½Ø¼ï¿½
     QCustomPlot* m_customPlot;
     QPushButton* m_btnLoadSingle;
     QPushButton* m_btnLoadMultiple;
@@ -49,36 +49,36 @@ private:
     QLabel* m_lblCoordinates;
     QLabel* m_lblStatus;
     QString filePath;
-    // Êý¾Ý´æ´¢
+    // ï¿½ï¿½ï¿½Ý´æ´¢
     QString fileName;
     QVector<QVector<double>> points;
     QVector<QString> variables;
 
-    QVector<QString> m_loadedFiles;//¼ÓÔØµÄÎÄ¼þ
+    QVector<QString> m_loadedFiles;//ï¿½ï¿½ï¿½Øµï¿½ï¿½Ä¼ï¿½
     Reader* m_reader;
 
-    // µ±Ç°Ñ¡ÔñµÄ×ø±êÖáË÷Òý
+    // ï¿½ï¿½Ç°Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int m_currentXIndex;
     int m_currentYIndex;
 
-    // ³õÊ¼»¯º¯Êý
+    // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void initUI();
     void initConnections();
     void setupPlot();
 
-    // Êý¾Ý²Ù×÷º¯Êý
+    // ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     bool readFile(const QString& filePath);
     void addCurveToPlot(int fileindex);
     void updatePlot();
     void updateAxisComboBoxes();
     void clearAllData();
 
-    // ¹¤¾ßº¯Êý
+    // ï¿½ï¿½ï¿½ßºï¿½ï¿½ï¿½
     QColor getRandomColor(int index) const;
     void showStatus(const QString& message, bool isError = false);
     void resetPlotRange();
 
-    // ½çÃæ²¼¾Ö
+    // ï¿½ï¿½ï¿½æ²¼ï¿½ï¿½
     QWidget* createControlPanel();
     QWidget* createPlotWidget();
     QWidget* createStatusBar();

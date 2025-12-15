@@ -1,5 +1,5 @@
 #include "pch.h"
-// ´´½¨»Øµ÷º¯Êı´¦Àí¼üÅÌÊÂ¼ş
+// ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 class KeyPressCallback : public vtkCommand
 {
 public:
@@ -20,32 +20,32 @@ public:
             if (currentRenderer)
             {
                 currentRenderer->ResetCamera();
-                std::cout << "ÖØÖÃµ±Ç°ÊÓÍ¼µÄÏà»ú" << std::endl;
+                std::cout << "ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½" << std::endl;
             }
         }
         else if (key == "a" || key == "A")
         {
-            // ÖØÖÃËùÓĞÊÓÍ¼
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
             for (auto renderer : renderers)
             {
                 if (renderer) renderer->ResetCamera();
             }
-            std::cout << "ÖØÖÃËùÓĞÊÓÍ¼µÄÏà»ú" << std::endl;
+            std::cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½" << std::endl;
         }
         else if (key == "1")
         {
-            // ÇĞ»»µ½ÖáÏòÊÓÍ¼ÉèÖÃ
-            std::cout << "ÖáÏòÊÓÍ¼ (XY) - ÇĞÆ¬: " << mapperXY->GetSliceNumber() << std::endl;
+            // ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+            std::cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ (XY) - ï¿½ï¿½Æ¬: " << mapperXY->GetSliceNumber() << std::endl;
         }
         else if (key == "2")
         {
-            // ÇĞ»»µ½Ê¸×´ÊÓÍ¼ÉèÖÃ
-            std::cout << "Ê¸×´ÊÓÍ¼ (YZ) - ÇĞÆ¬: " << mapperYZ->GetSliceNumber() << std::endl;
+            // ï¿½Ğ»ï¿½ï¿½ï¿½Ê¸×´ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+            std::cout << "Ê¸×´ï¿½ï¿½Í¼ (YZ) - ï¿½ï¿½Æ¬: " << mapperYZ->GetSliceNumber() << std::endl;
         }
         else if (key == "3")
         {
-            // ÇĞ»»µ½¹Ú×´ÊÓÍ¼ÉèÖÃ
-            std::cout << "¹Ú×´ÊÓÍ¼ (XZ) - ÇĞÆ¬: " << mapperXZ->GetSliceNumber() << std::endl;
+            // ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½×´ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+            std::cout << "ï¿½ï¿½×´ï¿½ï¿½Í¼ (XZ) - ï¿½ï¿½Æ¬: " << mapperXZ->GetSliceNumber() << std::endl;
         }
 
         iren->GetRenderWindow()->Render();
@@ -67,33 +67,33 @@ int test() {
     vtkImageData* imageData = reader->GetOutput();
     if (!imageData)
     {
-        std::cerr << "´íÎó: ÎŞ·¨¶ÁÈ¡DICOMÊı¾İ" << std::endl;
+        //std::cerr << "ï¿½ï¿½ï¿½ï¿½: ï¿½Ş·ï¿½ï¿½ï¿½È¡DICOMï¿½ï¿½ï¿½ï¿½" << std::endl;
         return -1;
     }
 
     int dims[3];
     imageData->GetDimensions(dims);
 
-    std::cout << "DICOMÊı¾İĞÅÏ¢:" << std::endl;
-    std::cout << "  Í¼Ïñ³ß´ç: " << dims[0] << " ¡Á " << dims[1] << " ¡Á " << dims[2] << std::endl;
-    std::cout << "  ÇĞÆ¬×ÜÊı: " << dims[2] << std::endl;
-    std::cout << "  ³¢ÊÔ²»Í¬ÇĞÆ¬Î»ÖÃ..." << std::endl;
+    std::cout << "DICOMï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢:" << std::endl;
+    std::cout << "  Í¼ï¿½ï¿½ß´ï¿½: " << dims[0] << " ï¿½ï¿½ " << dims[1] << " ï¿½ï¿½ " << dims[2] << std::endl;
+    std::cout << "  ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½: " << dims[2] << std::endl;
+    std::cout << "  ï¿½ï¿½ï¿½Ô²ï¿½Í¬ï¿½ï¿½Æ¬Î»ï¿½ï¿½..." << std::endl;
 
-    // ´´½¨äÖÈ¾´°¿ÚºÍ½»»¥Æ÷
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½ÚºÍ½ï¿½ï¿½ï¿½ï¿½ï¿½
     vtkNew<vtkRenderWindow> renderWindow;
     renderWindow->SetSize(1200, 800);
-    renderWindow->SetWindowName("DICOM ¶àÆ½Ãæ²é¿´Æ÷");
+    renderWindow->SetWindowName("DICOM ï¿½ï¿½Æ½ï¿½ï¿½é¿´ï¿½ï¿½");
 
     vtkNew<vtkRenderWindowInteractor> interactor;
     interactor->SetRenderWindow(renderWindow);
 
-    // ´´½¨äÖÈ¾Æ÷ÁĞ±í
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½Ğ±ï¿½
     std::vector<vtkRenderer*> renderers;
 
-    // ÖáÏòÊÓÍ¼ (XY) - ×óÉÏ½Ç
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ (XY) - ï¿½ï¿½ï¿½Ï½ï¿½
     vtkNew<vtkImageSliceMapper> mapperXY;
     mapperXY->SetInputConnection(reader->GetOutputPort());
-    mapperXY->SetSliceNumber(dims[2] / 4);  // ³¢ÊÔ1/4Î»ÖÃ
+    mapperXY->SetSliceNumber(dims[2] / 4);  // ï¿½ï¿½ï¿½ï¿½1/4Î»ï¿½ï¿½
     mapperXY->SetOrientationToZ();
 
     vtkNew<vtkImageSlice> sliceXY;
@@ -106,10 +106,10 @@ int test() {
     renderWindow->AddRenderer(rendererXY);
     renderers.push_back(rendererXY);
 
-    // Ê¸×´ÊÓÍ¼ (YZ) - ÓÒÉÏ½Ç
+    // Ê¸×´ï¿½ï¿½Í¼ (YZ) - ï¿½ï¿½ï¿½Ï½ï¿½
     vtkNew<vtkImageSliceMapper> mapperYZ;
     mapperYZ->SetInputConnection(reader->GetOutputPort());
-    mapperYZ->SetSliceNumber(dims[0] / 4);  // ³¢ÊÔ1/4Î»ÖÃ
+    mapperYZ->SetSliceNumber(dims[0] / 4);  // ï¿½ï¿½ï¿½ï¿½1/4Î»ï¿½ï¿½
     mapperYZ->SetOrientationToX();
 
     vtkNew<vtkImageSlice> sliceYZ;
@@ -122,10 +122,10 @@ int test() {
     renderWindow->AddRenderer(rendererYZ);
     renderers.push_back(rendererYZ);
 
-    // ¹Ú×´ÊÓÍ¼ (XZ) - ×óÏÂ½Ç
+    // ï¿½ï¿½×´ï¿½ï¿½Í¼ (XZ) - ï¿½ï¿½ï¿½Â½ï¿½
     vtkNew<vtkImageSliceMapper> mapperXZ;
     mapperXZ->SetInputConnection(reader->GetOutputPort());
-    mapperXZ->SetSliceNumber(dims[1] / 4);  // ³¢ÊÔ1/4Î»ÖÃ
+    mapperXZ->SetSliceNumber(dims[1] / 4);  // ï¿½ï¿½ï¿½ï¿½1/4Î»ï¿½ï¿½
     mapperXZ->SetOrientationToY();
 
     vtkNew<vtkImageSlice> sliceXZ;
@@ -138,18 +138,18 @@ int test() {
     renderWindow->AddRenderer(rendererXZ);
     renderers.push_back(rendererXZ);
 
-    // ĞÅÏ¢Ãæ°å - ÓÒÏÂ½Ç
+    // ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½Â½ï¿½
     vtkNew<vtkRenderer> rendererInfo;
     rendererInfo->SetViewport(0.5, 0.0, 1.0, 0.5);
     rendererInfo->SetBackground(0.1, 0.1, 0.1);
     renderWindow->AddRenderer(rendererInfo);
     renderers.push_back(rendererInfo);
 
-    // ÉèÖÃ½»»¥ÑùÊ½
+    // ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
     vtkNew<vtkInteractorStyleImage> style;
     interactor->SetInteractorStyle(style);
 
-    // Ìí¼Ó¼üÅÌ»Øµ÷
+    // ï¿½ï¿½Ó¼ï¿½ï¿½Ì»Øµï¿½
     vtkNew<KeyPressCallback> keyPressCallback;
     keyPressCallback->mapperXY = mapperXY;
     keyPressCallback->mapperYZ = mapperYZ;
@@ -157,23 +157,23 @@ int test() {
     keyPressCallback->SetRenderers(renderers);
     interactor->AddObserver(vtkCommand::KeyPressEvent, keyPressCallback);
 
-    // ´òÓ¡Ê¹ÓÃËµÃ÷
-    std::cout << "\nÊ¹ÓÃËµÃ÷:" << std::endl;
-    std::cout << "  1. µã»÷¼¤»îÈÎÒâÒ»¸öÊÓÍ¼" << std::endl;
-    std::cout << "  2. Êó±ê¹öÂÖ: ÔÚ¼¤»îµÄÊÓÍ¼ÖĞÇĞ»»ÇĞÆ¬" << std::endl;
-    std::cout << "  3. Êó±ê×ó¼üÍÏ¶¯: Æ½ÒÆÍ¼Ïñ" << std::endl;
-    std::cout << "  4. Êó±êÓÒ¼üÍÏ¶¯: Ëõ·ÅÍ¼Ïñ" << std::endl;
-    std::cout << "  5. °´ 'r' ¼ü: ÖØÖÃµ±Ç°ÊÓÍ¼" << std::endl;
-    std::cout << "  6. °´ 'a' ¼ü: ÖØÖÃËùÓĞÊÓÍ¼" << std::endl;
-    std::cout << "  7. °´ '1', '2', '3' ¼ü: ²é¿´µ±Ç°ÇĞÆ¬Î»ÖÃ" << std::endl;
+    // ï¿½ï¿½Ó¡Ê¹ï¿½ï¿½Ëµï¿½ï¿½
+    std::cout << "\nÊ¹ï¿½ï¿½Ëµï¿½ï¿½:" << std::endl;
+    std::cout << "  1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Í¼" << std::endl;
+    std::cout << "  2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½Æ¬" << std::endl;
+    std::cout << "  3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½: Æ½ï¿½ï¿½Í¼ï¿½ï¿½" << std::endl;
+    std::cout << "  4. ï¿½ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½Ï¶ï¿½: ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½" << std::endl;
+    std::cout << "  5. ï¿½ï¿½ 'r' ï¿½ï¿½: ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½Í¼" << std::endl;
+    std::cout << "  6. ï¿½ï¿½ 'a' ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼" << std::endl;
+    std::cout << "  7. ï¿½ï¿½ '1', '2', '3' ï¿½ï¿½: ï¿½é¿´ï¿½ï¿½Ç°ï¿½ï¿½Æ¬Î»ï¿½ï¿½" << std::endl;
 
-    // ÖØÖÃËùÓĞÏà»ú
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     for (auto renderer : renderers)
     {
         renderer->ResetCamera();
     }
 
-    // äÖÈ¾
+    // ï¿½ï¿½È¾
     renderWindow->Render();
     interactor->Start();
     return 0;

@@ -18,15 +18,15 @@ DimensionPlane::~DimensionPlane()
 
 void DimensionPlane::setupUI()
 {
-    // ´´½¨ÖĞÑë²¿¼ş
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²¿ï¿½ï¿½
     QWidget* centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
 
-    // ´´½¨Ö÷²¼¾Ö
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     m_mainLayout = new QHBoxLayout(centralWidget);
     m_mainLayout->setContentsMargins(0, 0, 0, 0);
 
-    // ´´½¨VTK²¿¼ş
+    // ï¿½ï¿½ï¿½ï¿½VTKï¿½ï¿½ï¿½ï¿½
     m_vtkWidget = new VTKWidget(centralWidget);
     m_mainLayout->addWidget(m_vtkWidget);
 }

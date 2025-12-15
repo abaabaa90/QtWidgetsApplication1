@@ -1,6 +1,6 @@
 #include "VTKWidget.h"
 
-// VTK°üº¬ÎÄ¼ş
+// VTKï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 #include <vtkRenderer.h>
 #include <vtkGenericOpenGLRenderWindow.h>
 #include <vtkRenderWindowInteractor.h>
@@ -29,149 +29,149 @@ VTKWidget::~VTKWidget()
 
 void VTKWidget::initializeVTK()
 {
-	// ´´½¨Í¨ÓÃOpenGLäÖÈ¾´°¿Ú£¨¹Ø¼üĞŞ¸´£©
+	// ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½OpenGLï¿½ï¿½È¾ï¿½ï¿½ï¿½Ú£ï¿½ï¿½Ø¼ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½
 	m_renderWindow = vtkSmartPointer<vtkGenericOpenGLRenderWindow>::New();
 	setRenderWindow(m_renderWindow);
 
-	// ´´½¨äÖÈ¾Æ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½
 	m_renderer = vtkSmartPointer<vtkRenderer>::New();
 	m_renderer->SetBackground(0.1, 0.2, 0.3);
-	m_renderer->SetBackground2(0.3, 0.4, 0.5);  // ½¥±ä±³¾°
+	m_renderer->SetBackground2(0.3, 0.4, 0.5);  // ï¿½ï¿½ï¿½ä±³ï¿½ï¿½
 	m_renderer->SetGradientBackground(true);
 	m_renderWindow->AddRenderer(m_renderer);
 
-	// ´´½¨µØÃæÆ½Ãæ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½
 	createGroundPlane();
 
-	// ÉèÖÃÏà»ú
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	setupCamera();
 
-	// ÉèÖÃ½»»¥Æ÷£¨±ØĞëÏÈÓÚ×ø±êÖáÉèÖÃ£©
+	// ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½
 	setupInteractor();
 
-	// ÉèÖÃ×ø±êÖá£¨ÏÖÔÚ½»»¥Æ÷ÒÑ¾­´æÔÚ£©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á£¨ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ú£ï¿½
 	setupAxes();
 
-	// ÖØÖÃÊÓÍ¼
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 	resetView();
 
 	m_isInitialized = true;
 }
 
-void VTKWidget::createGroundPlane()// ´´½¨µØÃæÆ½Ãæº¯Êı£¬ÓÃÓÚÔÚ3D³¡¾°ÖĞÌí¼ÓÒ»¸ö²Î¿¼Æ½Ãæ
+void VTKWidget::createGroundPlane()// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½æº¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3Dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Î¿ï¿½Æ½ï¿½ï¿½
 {
-	m_planeSource = vtkSmartPointer<vtkPlaneSource>::New();// vtkPlaneSourceÓÃÓÚÉú³ÉÒ»¸ö¾ØĞÎÆ½Ãæ
-	m_planeSource->SetCenter(0.0, 0.0, 0.0);   // ÉèÖÃÆ½ÃæµÄÖĞĞÄµã×ø±ê (x, y, z) = (0, 0, 0)
+	m_planeSource = vtkSmartPointer<vtkPlaneSource>::New();// vtkPlaneSourceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½
+	m_planeSource->SetCenter(0.0, 0.0, 0.0);   // ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ (x, y, z) = (0, 0, 0)
 
-	// ÉèÖÃÆ½ÃæµÄ·¨Ïß·½Ïò£¬ÕâÀïÉèÖÃÎªzÖáÕı·½Ïò£¬¼´Ë®Æ½Ãæ
-	m_planeSource->SetNormal(0.0, 0.0, 1.0);// ·¨ÏßÏòÁ¿(0,0,1)±íÊ¾Æ½ÃæÆ½ĞĞÓÚXYÆ½Ãæ
+	// ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Ä·ï¿½ï¿½ß·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªzï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò£¬¼ï¿½Ë®Æ½ï¿½ï¿½
+	m_planeSource->SetNormal(0.0, 0.0, 1.0);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(0,0,1)ï¿½ï¿½Ê¾Æ½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½XYÆ½ï¿½ï¿½
 
-	// ÉèÖÃÆ½ÃæµÄÏ¸·Ö·Ö±æÂÊ£¬20x20±íÊ¾Æ½Ãæ±»·Ö³É20¡Á20¸öĞ¡ËÄ±ßĞÎ
-	m_planeSource->SetResolution(20, 20);// ·Ö±æÂÊÔ½¸ß£¬Æ½ÃæÔ½Æ½»¬£¬µ«¼ÆËã¿ªÏúÔ½´ó
+	// ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Ï¸ï¿½Ö·Ö±ï¿½ï¿½Ê£ï¿½20x20ï¿½ï¿½Ê¾Æ½ï¿½æ±»ï¿½Ö³ï¿½20ï¿½ï¿½20ï¿½ï¿½Ğ¡ï¿½Ä±ï¿½ï¿½ï¿½
+	m_planeSource->SetResolution(20, 20);// ï¿½Ö±ï¿½ï¿½ï¿½Ô½ï¿½ß£ï¿½Æ½ï¿½ï¿½Ô½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¿ªï¿½ï¿½Ô½ï¿½ï¿½
 
-	// ´´½¨Æ½ÃæÓ³ÉäÆ÷
-	double planeSize = 10;// ¶¨ÒåÆ½ÃæµÄ´óĞ¡£¬ÕâÀïÆ½Ãæ½«ÊÇ´Ó-10µ½10µÄÕı·½ĞÎ
+	// ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½
+	double planeSize = 10;// ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Ä´ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½æ½«ï¿½Ç´ï¿½-10ï¿½ï¿½10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	// ÉèÖÃÆ½ÃæµÄÔ­µã×ø±ê£¨Æ½ÃæµÄÒ»¸ö½Çµã£©// Ô­µãÎ»ÓÚ(-10, -10, 0)
+	// ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ê£¨Æ½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Çµã£©// Ô­ï¿½ï¿½Î»ï¿½ï¿½(-10, -10, 0)
 	m_planeSource->SetOrigin(-planeSize, -planeSize, 0.0);
 
-	// ÉèÖÃÆ½ÃæµÄµÚÒ»¸öµã£¨´ÓÔ­µã³ö·¢µÄµÚÒ»Ìõ±ßµÄÖÕµã£©// Point1Î»ÓÚ(10, -10, 0)£¬¶¨ÒåÁËXÖá·½ÏòµÄ±ß½ç
+	// ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Äµï¿½Ò»ï¿½ï¿½ï¿½ã£¨ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ò»ï¿½ï¿½ï¿½ßµï¿½ï¿½Õµã£©// Point1Î»ï¿½ï¿½(10, -10, 0)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½á·½ï¿½ï¿½Ä±ß½ï¿½
 	m_planeSource->SetPoint1(planeSize, -planeSize, 0.0);
 
-	// ÉèÖÃÆ½ÃæµÄµÚ¶ş¸öµã£¨´ÓÔ­µã³ö·¢µÄµÚ¶şÌõ±ßµÄÖÕµã£©// Point2Î»ÓÚ(-10, 10, 0)£¬¶¨ÒåÁËYÖá·½ÏòµÄ±ß½ç
+	// ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ÄµÚ¶ï¿½ï¿½ï¿½ï¿½ã£¨ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄµÚ¶ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½Õµã£©// Point2Î»ï¿½ï¿½(-10, 10, 0)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½á·½ï¿½ï¿½Ä±ß½ï¿½
 	m_planeSource->SetPoint2(-planeSize, planeSize + 10, 0.0);
 
-	// ´´½¨¶à±ßĞÎÊı¾İÓ³ÉäÆ÷£¬ÓÃÓÚ½«¼¸ºÎÊı¾İ×ª»»ÎªÍ¼ĞÎÊı¾İ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ÎªÍ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	m_planeMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 
-	// ½«Æ½ÃæÔ´µÄÊı¾İÁ¬½Óµ½Ó³ÉäÆ÷µÄÊäÈë¶Ë¿Ú
-	m_planeMapper->SetInputConnection(m_planeSource->GetOutputPort());// GetOutputPort()»ñÈ¡Æ½ÃæÔ´µÄÊä³öÊı¾İÁ÷,½«Êı¾İ×ª»»³ÉGPUÒ×ÓÚÀí½âµÄĞÎÊ½
+	// ï¿½ï¿½Æ½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½
+	m_planeMapper->SetInputConnection(m_planeSource->GetOutputPort());// GetOutputPort()ï¿½ï¿½È¡Æ½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½GPUï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 
-	// ´´½¨Æ½ÃæÑİÔ±£¬¸ºÔğÔÚ³¡¾°ÖĞÏÔÊ¾Æ½Ãæ
-	m_planeActor = vtkSmartPointer<vtkActor>::New();//actor°üº¬mapper,property,transformµÈµÈÊôĞÔ,Ã¿¸öactor¶¼ÊÇ³¡¾°ÖĞµÄÒ»¸ö¶ÀÁ¢¶ÔÏó,Ó¦¸ÃÌí¼Óµ½renderÖĞÈ¥ÏÔÊ¾
+	// ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Æ½ï¿½ï¿½
+	m_planeActor = vtkSmartPointer<vtkActor>::New();//actorï¿½ï¿½ï¿½ï¿½mapper,property,transformï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½,Ã¿ï¿½ï¿½actorï¿½ï¿½ï¿½Ç³ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ó¦ï¿½ï¿½ï¿½ï¿½Óµï¿½renderï¿½ï¿½È¥ï¿½ï¿½Ê¾
 
-	m_planeActor->SetMapper(m_planeMapper);// ½«Ó³ÉäÆ÷ÉèÖÃ¸øÑİÔ±£¬ÕâÑùÑİÔ±¾ÍÖªµÀÈçºÎäÖÈ¾Æ½Ãæ
+	m_planeActor->SetMapper(m_planeMapper);// ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¾Æ½ï¿½ï¿½
 
-	vtkSmartPointer<vtkProperty> planeProperty = vtkSmartPointer<vtkProperty>::New();    // ÉèÖÃÆ½ÃæÊôĞÔ£¬¿ØÖÆÆ½ÃæµÄÍâ¹Û
+	vtkSmartPointer<vtkProperty> planeProperty = vtkSmartPointer<vtkProperty>::New();    // ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	planeProperty->SetColor(0.8, 0.8, 0.8);    // ÉèÖÃÆ½ÃæÑÕÉ«ÎªÇ³»ÒÉ« (R,G,B) = (0.8, 0.8, 0.8)
+	planeProperty->SetColor(0.8, 0.8, 0.8);    // ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½É«ÎªÇ³ï¿½ï¿½É« (R,G,B) = (0.8, 0.8, 0.8)
 
-	planeProperty->SetOpacity(0.7);    // ÉèÖÃÆ½ÃæÍ¸Ã÷¶ÈÎª0.7£¨1.0ÎªÍêÈ«²»Í¸Ã÷£¬0.0ÎªÍêÈ«Í¸Ã÷£©
+	planeProperty->SetOpacity(0.7);    // ï¿½ï¿½ï¿½ï¿½Æ½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½Îª0.7ï¿½ï¿½1.0Îªï¿½ï¿½È«ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½0.0Îªï¿½ï¿½È«Í¸ï¿½ï¿½ï¿½ï¿½
 
-	planeProperty->SetEdgeVisibility(true);    // ÆôÓÃ±ßÔµÏÔÊ¾£¬Ê¹Æ½ÃæÍø¸ñµÄ±ß½ç¿É¼û
+	planeProperty->SetEdgeVisibility(true);    // ï¿½ï¿½ï¿½Ã±ï¿½Ôµï¿½ï¿½Ê¾ï¿½ï¿½Ê¹Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ß½ï¿½É¼ï¿½
 
-	planeProperty->SetEdgeColor(0.4, 0.4, 0.4);    // ÉèÖÃ±ßÔµÑÕÉ«ÎªÉî»ÒÉ« (R,G,B) = (0.4, 0.4, 0.4)
+	planeProperty->SetEdgeColor(0.4, 0.4, 0.4);    // ï¿½ï¿½ï¿½Ã±ï¿½Ôµï¿½ï¿½É«Îªï¿½ï¿½ï¿½É« (R,G,B) = (0.4, 0.4, 0.4)
 
-	// ÉèÖÃ±ßÔµÏß¿íÎª1.5¸öµ¥Î»
+	// ï¿½ï¿½ï¿½Ã±ï¿½Ôµï¿½ß¿ï¿½Îª1.5ï¿½ï¿½ï¿½ï¿½Î»
 	planeProperty->SetLineWidth(1.5);
 
-	// ½«ÉèÖÃµÄÊôĞÔÓ¦ÓÃµ½Æ½ÃæÑİÔ±
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ãµï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ô±
 	m_planeActor->SetProperty(planeProperty);
 
-	// ½«Æ½ÃæÑİÔ±Ìí¼Óµ½äÖÈ¾Æ÷ÖĞ£¬Ê¹ÆäÔÚ³¡¾°ÖĞ¿É¼û
+	// ï¿½ï¿½Æ½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Óµï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½Ğ£ï¿½Ê¹ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½Ğ¿É¼ï¿½
 	m_renderer->AddActor(m_planeActor);
 
-	// ========== Ìí¼ÓÔ­µã±ê¼Ç£¨ºìÉ«Ğ¡Çò£© ==========
+	// ========== ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ï¿½É«Ğ¡ï¿½ï¿½ ==========
 
-	// ´´½¨ÇòÌåÔ´£¬ÓÃÓÚÉú³É±íÊ¾Ô­µãµÄÇòÌå¼¸ºÎ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É±ï¿½Ê¾Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å¼¸ï¿½ï¿½
 	vtkSmartPointer<vtkSphereSource> sphereSource = vtkSmartPointer<vtkSphereSource>::New();
 
-	sphereSource->SetCenter(0.0, 0.0, 0.0); // ÉèÖÃÇòÌåÖĞĞÄÔÚÊÀ½ç×ø±êÏµÔ­µã (0, 0, 0)
+	sphereSource->SetCenter(0.0, 0.0, 0.0); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÔ­ï¿½ï¿½ (0, 0, 0)
 
-	sphereSource->SetRadius(0.05);          // ÉèÖÃÇòÌå°ë¾¶Îª0.05¸öµ¥Î»
+	sphereSource->SetRadius(0.05);          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¾¶Îª0.05ï¿½ï¿½ï¿½ï¿½Î»
 
-	sphereSource->SetPhiResolution(16);     // ÉèÖÃÇòÌåµÄ¾­¶È·½ÏòÏ¸·ÖÊıÁ¿£¨´¹Ö±·½Ïò£©
+	sphereSource->SetPhiResolution(16);     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½È·ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½
 
-	sphereSource->SetThetaResolution(16);   // ÉèÖÃÇòÌåµÄÎ³¶È·½ÏòÏ¸·ÖÊıÁ¿£¨Ë®Æ½·½Ïò£©
+	sphereSource->SetThetaResolution(16);   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î³ï¿½È·ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë®Æ½ï¿½ï¿½ï¿½ï¿½
 
-	vtkSmartPointer<vtkPolyDataMapper> sphereMapper = vtkSmartPointer<vtkPolyDataMapper>::New();    // ´´½¨ÇòÌåµÄÓ³ÉäÆ÷
+	vtkSmartPointer<vtkPolyDataMapper> sphereMapper = vtkSmartPointer<vtkPolyDataMapper>::New();    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½
 
-	// ½«ÇòÌåÔ´µÄÊı¾İÁ¬½Óµ½Ó³ÉäÆ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ó³ï¿½ï¿½ï¿½ï¿½
 	sphereMapper->SetInputConnection(sphereSource->GetOutputPort());
 
-	// ´´½¨ÇòÌåÑİÔ±
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±
 	vtkSmartPointer<vtkActor> sphereActor = vtkSmartPointer<vtkActor>::New();
 
-	// ½«Ó³ÉäÆ÷ÉèÖÃ¸øÇòÌåÑİÔ±
+	// ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±
 	sphereActor->SetMapper(sphereMapper);
 
-	// ÉèÖÃÇòÌåÑÕÉ«Îª´¿ºìÉ« (R,G,B) = (1.0, 0.0, 0.0)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«Îªï¿½ï¿½ï¿½ï¿½É« (R,G,B) = (1.0, 0.0, 0.0)
 	sphereActor->GetProperty()->SetColor(1.0, 0.0, 0.0);
 
-	// ½«ÇòÌåÑİÔ±£¨Ô­µã±ê¼Ç£©Ìí¼Óµ½äÖÈ¾Æ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½È¾ï¿½ï¿½
 	m_renderer->AddActor(sphereActor);
 
-	// ========== Ìí¼ÓÏà»úÎ»ÖÃ±ê¼Ç£¨ÂÌÉ«Ğ¡Çò£© ==========
+	// ========== ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã±ï¿½Ç£ï¿½ï¿½ï¿½É«Ğ¡ï¿½ï¿½ ==========
 
-	// ´´½¨ÁíÒ»¸öÇòÌåÔ´£¬ÓÃÓÚ±íÊ¾Ïà»úÎ»ÖÃ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½Ê¾ï¿½ï¿½ï¿½Î»ï¿½ï¿½
 	vtkSmartPointer<vtkSphereSource> cameraSphereSource = vtkSmartPointer<vtkSphereSource>::New();
 
-	// ÉèÖÃÇòÌåÖĞĞÄÔÚ×ø±ê(1.0, 1.0, 1.0)£¬ÕâÍ¨³£±íÊ¾Ïà»ú¿ÉÄÜµÄÎ»ÖÃ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(1.0, 1.0, 1.0)ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½Î»ï¿½ï¿½
 	cameraSphereSource->SetCenter(1.0, 1.0, 1.0);
 
-	// ÉèÖÃÇòÌå°ë¾¶Îª0.05¸öµ¥Î»£¬ÓëÔ­µãÇòÌåÏàÍ¬´óĞ¡
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¾¶Îª0.05ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½Ğ¡
 	cameraSphereSource->SetRadius(0.05);
 
-	// ÉèÖÃÇòÌåÏ¸·Ö²ÎÊı
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½Ö²ï¿½ï¿½ï¿½
 	cameraSphereSource->SetPhiResolution(16);
 	cameraSphereSource->SetThetaResolution(16);
 
-	// ´´½¨Ïà»úÎ»ÖÃÇòÌåµÄÓ³ÉäÆ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½
 	vtkSmartPointer<vtkPolyDataMapper> cameraSphereMapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 
-	// Á¬½ÓÇòÌåÔ´Êı¾İµ½Ó³ÉäÆ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½İµï¿½Ó³ï¿½ï¿½ï¿½ï¿½
 	cameraSphereMapper->SetInputConnection(cameraSphereSource->GetOutputPort());
 
-	// ´´½¨Ïà»úÎ»ÖÃÇòÌåÑİÔ±
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±
 	vtkSmartPointer<vtkActor> cameraSphereActor = vtkSmartPointer<vtkActor>::New();
 
-	// ½«Ó³ÉäÆ÷ÉèÖÃ¸øÑİÔ±
+	// ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Ô±
 	cameraSphereActor->SetMapper(cameraSphereMapper);
 
-	// ÉèÖÃÇòÌåÑÕÉ«Îª´¿ÂÌÉ« (R,G,B) = (0.0, 1.0, 0.0)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«Îªï¿½ï¿½ï¿½ï¿½É« (R,G,B) = (0.0, 1.0, 0.0)
 	cameraSphereActor->GetProperty()->SetColor(0.0, 1.0, 0.0);
 
-	// ½«Ïà»úÎ»ÖÃÇòÌåÑİÔ±Ìí¼Óµ½äÖÈ¾Æ÷
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Óµï¿½ï¿½ï¿½È¾ï¿½ï¿½
 	m_renderer->AddActor(cameraSphereActor);
 }
 
@@ -183,18 +183,18 @@ void VTKWidget::setupCamera()
 	camera->SetViewUp(0.0, 0.0, 1.0);
 	camera->SetViewAngle(30.0);
 
-	// Ìí¼ÓÒ»Ğ©µÆ¹âĞ§¹û
+	// ï¿½ï¿½ï¿½Ò»Ğ©ï¿½Æ¹ï¿½Ğ§ï¿½ï¿½
 	m_renderer->SetUseShadows(false);
 	m_renderer->SetAmbient(0.3, 0.3, 0.3);
 }
 
 void VTKWidget::setupInteractor()
 {
-	// È·±£äÖÈ¾´°¿ÚÒÑÉèÖÃ
+	// È·ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!m_renderWindow)
 		return;
 
-	// »ñÈ¡½»»¥Æ÷
+	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	m_interactor = m_renderWindow->GetInteractor();
 
 	if (!m_interactor)
@@ -203,49 +203,49 @@ void VTKWidget::setupInteractor()
 		return;
 	}
 
-	// ÉèÖÃ½»»¥ÑùÊ½
+	// ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 	m_interactorStyle = vtkSmartPointer<vtkInteractorStyleTrackballCamera>::New();
 	m_interactor->SetInteractorStyle(m_interactorStyle);
 
-	// ÆôÓÃ½»»¥£¨¹Ø¼ü£º±ØĞëÏÈÉèÖÃ½»»¥Æ÷£¬ÔÙÆôÓÃ²¿¼ş£©
+	// ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½
 	m_interactor->Initialize();
 }
 
 void VTKWidget::setupAxes()
 {
-	// È·±£½»»¥Æ÷ÒÑ´æÔÚ
+	// È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ï¿½ï¿½
 	if (!m_interactor)
 	{
 		qDebug() << "Warning: Interactor not available for axes setup";
 		return;
 	}
 
-	// ´´½¨×ø±êÖá
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	m_axesActor = vtkSmartPointer<vtkAxesActor>::New();
 	m_axesActor->SetShaftTypeToLine();
 	m_axesActor->SetNormalizedShaftLength(0.8, 0.8, 0.8);
 	m_axesActor->SetNormalizedTipLength(0.2, 0.2, 0.2);
-	m_axesActor->AxisLabelsOff();  // ¿ÉÑ¡£º¹Ø±Õ±êÇ©ÏÔÊ¾
+	m_axesActor->AxisLabelsOff();  // ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ø±Õ±ï¿½Ç©ï¿½ï¿½Ê¾
 
-	// ÉèÖÃ×ø±êÖáÑÕÉ«ºÍ´ÖÏ¸
-	m_axesActor->GetXAxisShaftProperty()->SetColor(1.0, 0.0, 0.0);  // ºìÉ«XÖá
-	m_axesActor->GetYAxisShaftProperty()->SetColor(0.0, 1.0, 0.0);  // ÂÌÉ«YÖá
-	m_axesActor->GetZAxisShaftProperty()->SetColor(0.0, 0.0, 1.0);  // À¶É«ZÖá
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½Í´ï¿½Ï¸
+	m_axesActor->GetXAxisShaftProperty()->SetColor(1.0, 0.0, 0.0);  // ï¿½ï¿½É«Xï¿½ï¿½
+	m_axesActor->GetYAxisShaftProperty()->SetColor(0.0, 1.0, 0.0);  // ï¿½ï¿½É«Yï¿½ï¿½
+	m_axesActor->GetZAxisShaftProperty()->SetColor(0.0, 0.0, 1.0);  // ï¿½ï¿½É«Zï¿½ï¿½
 	m_axesActor->GetXAxisShaftProperty()->SetLineWidth(2.0);
 	m_axesActor->GetYAxisShaftProperty()->SetLineWidth(2.0);
 	m_axesActor->GetZAxisShaftProperty()->SetLineWidth(2.0);
 
-	// ´´½¨·½Ïò±ê¼Ç²¿¼ş
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½
 	m_axesWidget = vtkSmartPointer<vtkOrientationMarkerWidget>::New();
 	m_axesWidget->SetOrientationMarker(m_axesActor);
 
-	// ¹Ø¼üĞŞ¸´£º±ØĞëÏÈÉèÖÃ½»»¥Æ÷£¬ÔÙÆôÓÃ²¿¼ş
+	// ï¿½Ø¼ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
 	m_axesWidget->SetInteractor(m_interactor);
 	m_axesWidget->SetEnabled(1);
-	m_axesWidget->SetInteractive(0);  // ÉèÖÃÎª·Ç½»»¥Ê½
+	m_axesWidget->SetInteractive(0);  // ï¿½ï¿½ï¿½ï¿½Îªï¿½Ç½ï¿½ï¿½ï¿½Ê½
 	m_axesWidget->SetViewport(0.0, 0.0, 0.2, 0.2);
 
-	// äÖÈ¾
+	// ï¿½ï¿½È¾
 	m_renderWindow->Render();
 }
 

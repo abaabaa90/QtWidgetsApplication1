@@ -6,7 +6,7 @@
 // * @file vtkCharConvCompatibility.h
 // * @brief Compatibility shim for C++ charconv API
 // *
-// * Some older compilers, such as Intel LLVM ¡Ü2021.12, GCC ¡Ü9, Clang ¡Ü10, have incomplete
+// * Some older compilers, such as Intel LLVM ï¿½ï¿½2021.12, GCC ï¿½ï¿½9, Clang ï¿½ï¿½10, have incomplete
 // * or missing definitions for std::chars_format, std::from_chars_result.
 // * and std::to_chars_result. This header provides fallback definitions when
 // * needed, or includes the standard charconv otherwise.

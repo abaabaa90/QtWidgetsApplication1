@@ -4,7 +4,7 @@
 #include <QVTKOpenGLNativeWidget.h>
 #include <vtkSmartPointer.h>
 
-// Ç°ÏòÉùÃ÷VTKÀà
+// Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½VTKï¿½ï¿½
 class vtkRenderer;
 class vtkGenericOpenGLRenderWindow;
 class vtkRenderWindowInteractor;
@@ -33,7 +33,7 @@ private:
     void setupAxes();
     void setupInteractor();
 
-    // VTKÖÇÄÜÖ¸Õë
+    // VTKï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
     vtkSmartPointer<vtkRenderer> m_renderer;
     vtkSmartPointer<vtkGenericOpenGLRenderWindow> m_renderWindow;
     vtkSmartPointer<vtkRenderWindowInteractor> m_interactor;

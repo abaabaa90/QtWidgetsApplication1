@@ -13,15 +13,15 @@ public:
 
 private:
     QHBoxLayout* HMainLayout = nullptr;
-    QVector<QPushButton*> btnList;  // ±£´æËùÓÐ°´Å¥µÄÖ¸Õë
+    QVector<QPushButton*> btnList;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð°ï¿½Å¥ï¿½ï¿½Ö¸ï¿½ï¿½
     QStringList TitleBarContent = { "File", "Edit", "View", "Help" };
-    int currentCheckedBtnIdx = -1;  // µ±Ç°Ñ¡ÖÐ°´Å¥µÄË÷Òý
+    int currentCheckedBtnIdx = -1;  // ï¿½ï¿½Ç°Ñ¡ï¿½Ð°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // ÐÞÕýºóµÄÑùÊ½±í
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½
     QString buttonStyle = R"(
         QPushButton {
-            background-color: #000000;  /* ºÚÉ«±³¾° */
-            color: #FFFFFF;             /* °×É«ÎÄ×Ö */
+            background-color: #000000;  /* ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ */
+            color: #FFFFFF;             /* ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ */
             border: none;
             padding: 8px 16px;
             margin: 0px;
@@ -38,14 +38,14 @@ private:
         }
         
         QPushButton:checked {
-            background-color: #FFFFFF;  /* Ñ¡ÖÐÊ±°×É«±³¾° */
-            color: #000000;             /* Ñ¡ÖÐÊ±ºÚÉ«ÎÄ×Ö */
+            background-color: #FFFFFF;  /* Ñ¡ï¿½ï¿½Ê±ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ */
+            color: #000000;             /* Ñ¡ï¿½ï¿½Ê±ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ */
             font-weight: bold;
-            border-bottom: 2px solid #FF0000; /* ºìÉ«µ×²¿±ß¿ò×÷ÎªÑ¡ÖÐ±êÊ¶ */
+            border-bottom: 2px solid #FF0000; /* ï¿½ï¿½É«ï¿½×²ï¿½ï¿½ß¿ï¿½ï¿½ï¿½ÎªÑ¡ï¿½Ð±ï¿½Ê¶ */
         }
         
         QPushButton:checked:hover {
-            background-color: #F0F0F0;  /* Ñ¡ÖÐÐüÍ£Ê±Ç³»ÒÉ« */
+            background-color: #F0F0F0;  /* Ñ¡ï¿½ï¿½ï¿½ï¿½Í£Ê±Ç³ï¿½ï¿½É« */
         }
     )";
 };

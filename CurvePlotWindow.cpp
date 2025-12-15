@@ -22,17 +22,17 @@ CurvePlotWindow::CurvePlotWindow(QWidget* parent)
     , m_currentXIndex(0)
     , m_currentYIndex(1)
 {
-    // ÉèÖÃ´°¿ÚÊôÐÔ
-    setWindowTitle("ÇúÏßÍ¼»æÖÆ¹¤¾ß - VS2022 + Qt5.14.2");
+    // ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    setWindowTitle("ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Æ¹ï¿½ï¿½ï¿½ - VS2022 + Qt5.14.2");
     resize(1200, 800);
 
-    // ³õÊ¼»¯UI
+    // ï¿½ï¿½Ê¼ï¿½ï¿½UI
     initUI();
     initConnections();
     setupPlot();
 
-    // ³õÊ¼×´Ì¬
-    showStatus("¾ÍÐ÷");
+    // ï¿½ï¿½Ê¼×´Ì¬
+    showStatus("ï¿½ï¿½ï¿½ï¿½");
 }
 
 CurvePlotWindow::~CurvePlotWindow()
@@ -42,51 +42,51 @@ CurvePlotWindow::~CurvePlotWindow()
 
 void CurvePlotWindow::initUI()
 {
-    // ´´½¨ÖÐÑë²¿¼þ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²¿ï¿½ï¿½
     QWidget* centralWidget = new QWidget(this);
     QVBoxLayout* mainLayout = new QVBoxLayout(centralWidget);
 
-    // Ìí¼Ó¿ØÖÆÃæ°å
+    // ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     mainLayout->addWidget(createControlPanel());
 
-    // Ìí¼Ó»æÍ¼ÇøÓò
-    mainLayout->addWidget(createPlotWidget(), 1); // 1±íÊ¾À­ÉìÒò×Ó
+    // ï¿½ï¿½Ó»ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+    mainLayout->addWidget(createPlotWidget(), 1); // 1ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // Ìí¼Ó×´Ì¬À¸ÇøÓò
+    // ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     mainLayout->addWidget(createStatusBar());
 
-    // ÉèÖÃÖÐÑë²¿¼þ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë²¿ï¿½ï¿½
     setCentralWidget(centralWidget);
 }
 
 QWidget* CurvePlotWindow::createControlPanel()
 {
-    QGroupBox* controlGroup = new QGroupBox("¿ØÖÆÃæ°å", this);
+    QGroupBox* controlGroup = new QGroupBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", this);
     QHBoxLayout* layout = new QHBoxLayout(controlGroup);
 
-    // ´´½¨°´Å¥
-    m_btnLoadSingle = new QPushButton("¼ÓÔØµ¥¸öÎÄ¼þ", this);
-    m_btnLoadMultiple = new QPushButton("¼ÓÔØ¶à¸öÎÄ¼þ", this);
-    m_btnClear = new QPushButton("Çå³ýÍ¼±í", this);
-    m_btnSave = new QPushButton("±£´æÍ¼±í", this);
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
+    m_btnLoadSingle = new QPushButton("ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½Ä¼ï¿½", this);
+    m_btnLoadMultiple = new QPushButton("ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½Ä¼ï¿½", this);
+    m_btnClear = new QPushButton("ï¿½ï¿½ï¿½Í¼ï¿½ï¿½", this);
+    m_btnSave = new QPushButton("ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½", this);
 
-    // ÉèÖÃ°´Å¥ÑùÊ½
+    // ï¿½ï¿½ï¿½Ã°ï¿½Å¥ï¿½ï¿½Ê½
     QString buttonStyle = "QPushButton { padding: 8px; font-weight: bold; }";
     m_btnLoadSingle->setStyleSheet(buttonStyle);
     m_btnLoadMultiple->setStyleSheet(buttonStyle);
     m_btnClear->setStyleSheet(buttonStyle);
     m_btnSave->setStyleSheet(buttonStyle);
 
-    // ´´½¨×ø±êÖáÑ¡Ôñ
-    QLabel* lblXAxis = new QLabel("XÖá:", this);
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
+    QLabel* lblXAxis = new QLabel("Xï¿½ï¿½:", this);
     m_cmbXAxis = new QComboBox(this);
     m_cmbXAxis->setMinimumWidth(120);
 
-    QLabel* lblYAxis = new QLabel("YÖá:", this);
+    QLabel* lblYAxis = new QLabel("Yï¿½ï¿½:", this);
     m_cmbYAxis = new QComboBox(this);
     m_cmbYAxis->setMinimumWidth(120);
 
-    // Ìí¼Óµ½²¼¾Ö
+    // ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
     layout->addWidget(m_btnLoadSingle);
     layout->addWidget(m_btnLoadMultiple);
     layout->addWidget(m_btnClear);
@@ -102,10 +102,10 @@ QWidget* CurvePlotWindow::createControlPanel()
 
 QWidget* CurvePlotWindow::createPlotWidget()
 {
-    QGroupBox* plotGroup = new QGroupBox("ÇúÏßÍ¼", this);
+    QGroupBox* plotGroup = new QGroupBox("ï¿½ï¿½ï¿½ï¿½Í¼", this);
     QVBoxLayout* layout = new QVBoxLayout(plotGroup);
 
-    // ´´½¨QCustomPlot
+    // ï¿½ï¿½ï¿½ï¿½QCustomPlot
     m_customPlot = new QCustomPlot(this);
     layout->addWidget(m_customPlot);
 
@@ -117,17 +117,17 @@ QWidget* CurvePlotWindow::createStatusBar()
     QWidget* statusWidget = new QWidget(this);
     QHBoxLayout* layout = new QHBoxLayout(statusWidget);
 
-    // ×ø±êÏÔÊ¾±êÇ©
-    m_lblCoordinates = new QLabel("×ø±ê: (0.000, 0.000)", this);
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ç©
+    m_lblCoordinates = new QLabel("ï¿½ï¿½ï¿½ï¿½: (0.000, 0.000)", this);
     m_lblCoordinates->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     m_lblCoordinates->setMinimumWidth(200);
 
-    // ×´Ì¬ÏÔÊ¾±êÇ©
-    m_lblStatus = new QLabel("¾ÍÐ÷", this);
+    // ×´Ì¬ï¿½ï¿½Ê¾ï¿½ï¿½Ç©
+    m_lblStatus = new QLabel("ï¿½ï¿½ï¿½ï¿½", this);
     m_lblStatus->setFrameStyle(QFrame::Panel | QFrame::Sunken);
     m_lblStatus->setMinimumWidth(400);
 
-    // Ìí¼Óµ½²¼¾Ö
+    // ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
     layout->addWidget(m_lblCoordinates);
     layout->addStretch();
     layout->addWidget(m_lblStatus);
@@ -137,46 +137,46 @@ QWidget* CurvePlotWindow::createStatusBar()
 
 void CurvePlotWindow::initConnections()
 {
-    // °´Å¥ÐÅºÅÁ¬½Ó
+    // ï¿½ï¿½Å¥ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½
     connect(m_btnLoadSingle, &QPushButton::clicked, this, &CurvePlotWindow::onLoadSingleFile);
     connect(m_btnLoadMultiple, &QPushButton::clicked, this, &CurvePlotWindow::onLoadMultipleFiles);
     connect(m_btnClear, &QPushButton::clicked, this, &CurvePlotWindow::onClearPlot);
     connect(m_btnSave, &QPushButton::clicked, this, &CurvePlotWindow::onSavePlot);
 
-    // ×ø±êÖáÏÂÀ­¿òÐÅºÅÁ¬½Ó
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½
     connect(m_cmbXAxis, QOverload<int>::of(&QComboBox::currentIndexChanged),
         this, &CurvePlotWindow::onXAxisChanged);
     connect(m_cmbYAxis, QOverload<int>::of(&QComboBox::currentIndexChanged),
         this, &CurvePlotWindow::onYAxisChanged);
 
-    // Êó±êÒÆ¶¯ÐÅºÅÁ¬½Ó
+    // ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½
     connect(m_customPlot, &QCustomPlot::mouseMove, this, &CurvePlotWindow::onMouseMove);
 }
 
 void CurvePlotWindow::setupPlot()
 {
-    // ÉèÖÃ±³¾°
+    // ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½
     m_customPlot->setBackground(QBrush(QColor(255, 255, 255)));
 
-    // ÉèÖÃ×ø±êÖá
-    m_customPlot->xAxis->setLabel("XÖá");
-    m_customPlot->yAxis->setLabel("YÖá");
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    m_customPlot->xAxis->setLabel("Xï¿½ï¿½");
+    m_customPlot->yAxis->setLabel("Yï¿½ï¿½");
 
-    // ÉèÖÃ×ø±êÖá±êÇ©×ÖÌå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½
     QFont labelFont("Microsoft YaHei", 10, QFont::Bold);
     m_customPlot->xAxis->setLabelFont(labelFont);
     m_customPlot->yAxis->setLabelFont(labelFont);
 
-    // ÉèÖÃ×ø±êÖá¿Ì¶È×ÖÌå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½
     QFont tickFont("Microsoft YaHei", 9);
     m_customPlot->xAxis->setTickLabelFont(tickFont);
     m_customPlot->yAxis->setTickLabelFont(tickFont);
 
-    // ÉèÖÃ³õÊ¼·¶Î§
+    // ï¿½ï¿½ï¿½Ã³ï¿½Ê¼ï¿½ï¿½Î§
     m_customPlot->xAxis->setRange(-10, 10);
     m_customPlot->yAxis->setRange(-10, 10);
 
-    // ÉèÖÃÍø¸ñ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     m_customPlot->xAxis->grid()->setVisible(true);
     m_customPlot->yAxis->grid()->setVisible(true);
     m_customPlot->xAxis->grid()->setSubGridVisible(true);
@@ -184,60 +184,60 @@ void CurvePlotWindow::setupPlot()
     m_customPlot->xAxis->grid()->setPen(QPen(QColor(200, 200, 200), 1, Qt::DotLine));
     m_customPlot->yAxis->grid()->setPen(QPen(QColor(200, 200, 200), 1, Qt::DotLine));
 
-    // ÉèÖÃÍ¼Àý
+    // ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
     m_customPlot->legend->setVisible(true);
     m_customPlot->legend->setFont(QFont("Microsoft YaHei", 9));
     m_customPlot->legend->setBrush(QBrush(QColor(255, 255, 255, 200)));
     m_customPlot->legend->setBorderPen(QPen(QColor(150, 150, 150, 200)));
 
-    // ÆôÓÃ½»»¥¹¦ÄÜ
+    // ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     m_customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 
-    // ³õÊ¼»¯×ø±êÖáÏÂÀ­¿ò
+    // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     updateAxisComboBoxes();
 }
 
 QColor CurvePlotWindow::getRandomColor(int index) const
 {
-    // Ô¤¶¨ÒåÒ»×éÃÀ¹ÛµÄÑÕÉ«
+    // Ô¤ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½É«
     static const QVector<QColor> colorTable = {
-        QColor(31, 119, 180),    // À¶É«
-        QColor(255, 127, 14),    // ³ÈÉ«
-        QColor(44, 160, 44),     // ÂÌÉ«
-        QColor(214, 39, 40),     // ºìÉ«
-        QColor(148, 103, 189),   // ×ÏÉ«
-        QColor(140, 86, 75),     // ×ØÉ«
-        QColor(227, 119, 194),   // ·ÛÉ«
-        QColor(127, 127, 127),   // »ÒÉ«
-        QColor(188, 189, 34),    // éÏé­É«
-        QColor(23, 190, 207)     // ÇàÉ«
+        QColor(31, 119, 180),    // ï¿½ï¿½É«
+        QColor(255, 127, 14),    // ï¿½ï¿½É«
+        QColor(44, 160, 44),     // ï¿½ï¿½É«
+        QColor(214, 39, 40),     // ï¿½ï¿½É«
+        QColor(148, 103, 189),   // ï¿½ï¿½É«
+        QColor(140, 86, 75),     // ï¿½ï¿½É«
+        QColor(227, 119, 194),   // ï¿½ï¿½É«
+        QColor(127, 127, 127),   // ï¿½ï¿½É«
+        QColor(188, 189, 34),    // ï¿½ï¿½ï¿½É«
+        QColor(23, 190, 207)     // ï¿½ï¿½É«
     };
 
-    // Èç¹ûË÷ÒýÔÚÔ¤¶¨ÒåÑÕÉ«·¶Î§ÄÚ£¬Ê¹ÓÃÔ¤¶¨ÒåÑÕÉ«
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½Î§ï¿½Ú£ï¿½Ê¹ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
     if (index >= 0 && index < colorTable.size()) {
         return colorTable[index];
     }
 
-    // ·ñÔòÉú³ÉËæ»úÑÕÉ«
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
     return QColor::fromHsv(
-        QRandomGenerator::global()->bounded(360),  // É«µ÷ (0-359)
-        150 + QRandomGenerator::global()->bounded(106),  // ±¥ºÍ¶È (150-255)
-        150 + QRandomGenerator::global()->bounded(106)   // ÁÁ¶È (150-255)
+        QRandomGenerator::global()->bounded(360),  // É«ï¿½ï¿½ (0-359)
+        150 + QRandomGenerator::global()->bounded(106),  // ï¿½ï¿½ï¿½Í¶ï¿½ (150-255)
+        150 + QRandomGenerator::global()->bounded(106)   // ï¿½ï¿½ï¿½ï¿½ (150-255)
     );
 }
 
-void CurvePlotWindow::updateAxisComboBoxes()//¸üÐÂ×ø±êÏµµÄxÖáºÍyÖáÂð
+void CurvePlotWindow::updateAxisComboBoxes()//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½xï¿½ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½
 {
-    // ×èÈûÐÅºÅ£¬±ÜÃâ¶à´Î´¥·¢
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ÅºÅ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½
     m_cmbXAxis->blockSignals(true);
     m_cmbYAxis->blockSignals(true);
 
-    // Çå¿ÕÏÂÀ­¿ò
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     m_cmbXAxis->clear();
     m_cmbYAxis->clear();
 
     if (m_loadedFiles.isEmpty()) {
-        // Èç¹ûÃ»ÓÐ¼ÓÔØÎÄ¼þ£¬Ê¹ÓÃÄ¬ÈÏÑ¡Ïî
+        // ï¿½ï¿½ï¿½Ã»ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ä¬ï¿½ï¿½Ñ¡ï¿½ï¿½
         m_cmbXAxis->addItem("X");
         m_cmbYAxis->addItem("Y");
 
@@ -245,20 +245,20 @@ void CurvePlotWindow::updateAxisComboBoxes()//¸üÐÂ×ø±êÏµµÄxÖáºÍyÖáÂð
         m_currentYIndex = 1;
     }
     else {
-        // Ê¹ÓÃµÚÒ»¸öÎÄ¼þµÄ±äÁ¿ÁÐ±í
+        // Ê¹ï¿½Ãµï¿½Ò»ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
         
         auto variables = CurvePlot[0]->Variables;
         for (int i = 0; i < variables.size(); ++i) {
             QString varName =  QString::fromStdString(variables[i]);
             if (varName.isEmpty()) {
-                std::cout << "±äÁ¿ÃûÎª¿Õ\n";
-                varName = QString("±äÁ¿%1").arg(i + 1);
+                std::cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½\n";
+                varName = QString("ï¿½ï¿½ï¿½ï¿½%1").arg(i + 1);
             }
             m_cmbXAxis->addItem(varName);
             m_cmbYAxis->addItem(varName);
         }
 
-        // È·±£µ±Ç°Ë÷ÒýÔÚÓÐÐ§·¶Î§ÄÚ
+        // È·ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½Î§ï¿½ï¿½
         if (m_currentXIndex >= m_cmbXAxis->count()) {
             m_currentXIndex = 0;
         }
@@ -266,67 +266,67 @@ void CurvePlotWindow::updateAxisComboBoxes()//¸üÐÂ×ø±êÏµµÄxÖáºÍyÖáÂð
             m_currentYIndex = qMin(1, m_cmbYAxis->count() - 1);
         }
 
-        // ÉèÖÃµ±Ç°Ñ¡Ôñ
+        // ï¿½ï¿½ï¿½Ãµï¿½Ç°Ñ¡ï¿½ï¿½
         m_cmbXAxis->setCurrentIndex(m_currentXIndex);
         m_cmbYAxis->setCurrentIndex(m_currentYIndex);
     }
 
-    // »Ö¸´ÐÅºÅ
+    // ï¿½Ö¸ï¿½ï¿½Åºï¿½
     m_cmbXAxis->blockSignals(false);
     m_cmbYAxis->blockSignals(false);
 }
 
-bool CurvePlotWindow::readFile(const QString& filePath)//´«½øÀ´ÎÄ¼þÂ·¾¶È»ºóÄØ
+bool CurvePlotWindow::readFile(const QString& filePath)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½
 {
     QFileInfo fileInfo(filePath);
 
-    // ¼ì²éÎÄ¼þÊÇ·ñ´æÔÚ
+    // ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
     if (!fileInfo.exists()) {
-        showStatus(QString("ÎÄ¼þ²»´æÔÚ: %1").arg(filePath), true);
+        showStatus(QString("ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: %1").arg(filePath), true);
         return false;
     }
 
-    // ¼ì²éÎÄ¼þ´óÐ¡
+    // ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡
     if (fileInfo.size() == 0) {
-        showStatus(QString("ÎÄ¼þÎª¿Õ: %1").arg(filePath), true);
+        showStatus(QString("ï¿½Ä¼ï¿½Îªï¿½ï¿½: %1").arg(filePath), true);
         return false;
     }
 
-    // Ê¹ÓÃReader¶ÁÈ¡ÎÄ¼þ
+    // Ê¹ï¿½ï¿½Readerï¿½ï¿½È¡ï¿½Ä¼ï¿½
     QByteArray filePathBytes = filePath.toLocal8Bit();
     if (!m_reader->ReadFile(filePathBytes.constData())) {
-        showStatus(QString("ÎÞ·¨¶ÁÈ¡ÎÄ¼þ: %1").arg(filePath), true);
+        showStatus(QString("ï¿½Þ·ï¿½ï¿½ï¿½È¡ï¿½Ä¼ï¿½: %1").arg(filePath), true);
         return false;
     }
 
-    // ¼ì²éÊý¾ÝÎ¬¶È
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½
     size_t dimension = m_reader->GetDimension();
     if (dimension < 2) {
-        showStatus(QString("ÎÄ¼þÎ¬¶ÈÐ¡ÓÚ2: %1").arg(filePath), true);
+        showStatus(QString("ï¿½Ä¼ï¿½Î¬ï¿½ï¿½Ð¡ï¿½ï¿½2: %1").arg(filePath), true);
         return false;
     }
 
-    // ¼ì²éÊý¾ÝµãÊýÁ¿
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½
     size_t pointCount = m_reader->GetPointCount();
     if (pointCount == 0) {
-        showStatus(QString("ÎÄ¼þÖÐÃ»ÓÐÓÐÐ§Êý¾Ýµã: %1").arg(filePath), true);
+        showStatus(QString("ï¿½Ä¼ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ýµï¿½: %1").arg(filePath), true);
         return false;
     }
 
     return true;
 }
-//Õâ¸öÀàÓ¦¸ÃÖ»½ÓÊÕ´«¹ýÀ´µÄÊý¾Ý,È»ºó£¬´«½øÀ´µÄÓ¦¸ÃÊÇÊ²Ã´ÄØ£¬tecplotÀïÃæÊÇÒ»¸ö±äÁ¿ÁÐ±íºÍÒ»¸ö³¤Êý×é,¶øÎÒÕâÀïÖ»ÊÇ¼òµ¥µÄ¶þÎ¬×ø±ê
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Õ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,È»ï¿½ó£¬´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½Ø£ï¿½tecplotï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½Ç¼òµ¥µÄ¶ï¿½Î¬ï¿½ï¿½ï¿½ï¿½
 
-void CurvePlotWindow::addCurveToPlot(int fileindex)//Ìí¼ÓÇúÏß
+void CurvePlotWindow::addCurveToPlot(int fileindex)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
-    // ¼ì²é×ø±êÖáË÷ÒýÊÇ·ñÓÐÐ§
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ð§
     int xIdx = m_currentXIndex;
     int yIdx = m_currentYIndex;
 
     
-    // ×¼±¸XºÍYÊý¾Ý
+    // ×¼ï¿½ï¿½Xï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½
     QVector<double> xData, yData;
-    for (size_t i = 0; i < CurvePlot[fileindex]->Points.size(); i++)//±éÀúÆäÃ¿Ò»ÐÐ,È»ºó±éÀúÁÐ
+    for (size_t i = 0; i < CurvePlot[fileindex]->Points.size(); i++)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½,È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         std::cout << "X:" << CurvePlot[fileindex]->Points[i][0] << "Y:" << CurvePlot[fileindex]->Points[i][1] << std::endl;
         for (size_t j = 0; j < 2; j++)
@@ -339,15 +339,15 @@ void CurvePlotWindow::addCurveToPlot(int fileindex)//Ìí¼ÓÇúÏß
         return;
     }
 
-    // ´´½¨Í¼ÐÎ
+    // ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
     m_customPlot->addGraph();
     QCPGraph* graph = m_customPlot->graph();
     graph->setData(xData, yData);
 
-    // ÉèÖÃÇúÏßÃû³Æ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     QString graphName = QString::fromStdString(CurvePlot[0]->DataTitle);
     graph->setName(graphName);
-    // ÉèÖÃÇúÏßÑùÊ½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
     graph->setPen(QPen(Qt::black, 2));
     graph->setLineStyle(QCPGraph::lsLine);
     graph->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, Qt::black, Qt::white, 6));
@@ -357,25 +357,25 @@ void CurvePlotWindow::updatePlot()
 {
     m_customPlot->clearGraphs();
 
-    // Ìí¼ÓËùÓÐÎÄ¼þµÄÇúÏß
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     for (int i = 0; i < CurvePlot.size(); ++i) {
         addCurveToPlot(i);
     }
 
-    // ×Ô¶¯µ÷Õû×ø±êÖá·¶Î§
+    // ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á·¶Î§
     m_customPlot->rescaleAxes();
 
-    // ÉÔÎ¢À©´ó·¶Î§ÒÔ±ãÃÀ¹Û
+    // ï¿½ï¿½Î¢ï¿½ï¿½ï¿½ï¿½Î§ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½
     m_customPlot->xAxis->scaleRange(1.1, m_customPlot->xAxis->range().center());
     m_customPlot->yAxis->scaleRange(1.1, m_customPlot->yAxis->range().center());
 
-    // ¸üÐÂ×ø±êÖá±êÇ©
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©
     m_customPlot->xAxis->setLabel(QString::fromStdString(CurvePlot[0]->Variables[0]));
     m_customPlot->yAxis->setLabel(QString::fromStdString(CurvePlot[0]->Variables[1]));
 
-    // ÖØ»æÍ¼
+    // ï¿½Ø»ï¿½Í¼
     m_customPlot->replot();
-    showStatus(QString("ÒÑ¼ÓÔØ %1 ¸öÎÄ¼þ£¬¹² %2 ¸öÊý¾Ýµã")
+    showStatus(QString("ï¿½Ñ¼ï¿½ï¿½ï¿½ %1 ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ %2 ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½")
         .arg(m_loadedFiles.size()));
 }
 
@@ -383,8 +383,8 @@ void CurvePlotWindow::resetPlotRange()
 {
     m_customPlot->xAxis->setRange(-10, 10);
     m_customPlot->yAxis->setRange(-10, 10);
-    m_customPlot->xAxis->setLabel("XÖá");
-    m_customPlot->yAxis->setLabel("YÖá");
+    m_customPlot->xAxis->setLabel("Xï¿½ï¿½");
+    m_customPlot->yAxis->setLabel("Yï¿½ï¿½");
     m_customPlot->replot();
 }
 
@@ -392,7 +392,7 @@ void CurvePlotWindow::showStatus(const QString& message, bool isError)
 {
     m_lblStatus->setText(message);
 
-    // ¸ù¾ÝÏûÏ¢ÀàÐÍÉèÖÃÑÕÉ«
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
     if (isError) {
         m_lblStatus->setStyleSheet("QLabel { color: red; font-weight: bold; }");
     }
@@ -407,26 +407,26 @@ void CurvePlotWindow::clearAllData()
     m_customPlot->clearGraphs();
     resetPlotRange();
     updateAxisComboBoxes();
-    showStatus("ÒÑÇå³ýËùÓÐÊý¾Ý");
+    showStatus("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 }
 
-// ==================== ²Ûº¯ÊýÊµÏÖ ====================
+// ==================== ï¿½Ûºï¿½ï¿½ï¿½Êµï¿½ï¿½ ====================
 
 void CurvePlotWindow::onLoadSingleFile()
 {
     QString filePath = QFileDialog::getOpenFileName(
         this,
-        "Ñ¡ÔñÊý¾ÝÎÄ¼þ",
+        "Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½",
         QDir::currentPath(),
-        "ÎÄ±¾ÎÄ¼þ (*.txt);;ËùÓÐÎÄ¼þ (*.*)"
+        "ï¿½Ä±ï¿½ï¿½Ä¼ï¿½ (*.txt);;ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ (*.*)"
     );
-    qDebug() << filePath << endl;//ÕâÀïÎÒÐèÒª¿´Ò»ÏÂÊÇ¾ø¶ÔÂ·¾¶»¹ÊÇÏà¶ÔÂ·¾¶
+    qDebug() << filePath << endl;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
     Reader* t = new Reader();
     if (t->ReadFile(filePath.toStdString().c_str())) {
         CurvePlot.push_back(t);
         updateAxisComboBoxes();
         updatePlot();
-        showStatus(QString("³É¹¦¼ÓÔØÎÄ¼þ: %1").arg(QFileInfo(filePath).fileName()));
+        showStatus(QString("ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½: %1").arg(QFileInfo(filePath).fileName()));
     }
 }
 
@@ -434,9 +434,9 @@ void CurvePlotWindow::onLoadMultipleFiles()
 {
     QStringList filePaths = QFileDialog::getOpenFileNames(
         this,
-        "Ñ¡Ôñ¶à¸öÊý¾ÝÎÄ¼þ",
+        "Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½",
         QDir::currentPath(),
-        "ÎÄ±¾ÎÄ¼þ (*.txt);;ËùÓÐÎÄ¼þ (*.*)"
+        "ï¿½Ä±ï¿½ï¿½Ä¼ï¿½ (*.txt);;ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ (*.*)"
     );
 
     if (filePaths.isEmpty()) {
@@ -453,21 +453,21 @@ void CurvePlotWindow::onLoadMultipleFiles()
     if (successCount > 0) {
         updateAxisComboBoxes();
         updatePlot();
-        showStatus(QString("³É¹¦¼ÓÔØ %1/%2 ¸öÎÄ¼þ").arg(successCount).arg(filePaths.size()));
+        showStatus(QString("ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ %1/%2 ï¿½ï¿½ï¿½Ä¼ï¿½").arg(successCount).arg(filePaths.size()));
     }
 }
 
 void CurvePlotWindow::onClearPlot()
 {
     if (m_loadedFiles.isEmpty()) {
-        showStatus("Ã»ÓÐÊý¾ÝÐèÒªÇå³ý");
+        showStatus("Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½");
         return;
     }
 
     QMessageBox::StandardButton reply = QMessageBox::question(
         this,
-        "È·ÈÏÇå³ý",
-        "È·¶¨ÒªÇå³ýËùÓÐÇúÏßÊý¾ÝÂð£¿",
+        "È·ï¿½ï¿½ï¿½ï¿½ï¿½",
+        "È·ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
         QMessageBox::Yes | QMessageBox::No
     );
 
@@ -479,7 +479,7 @@ void CurvePlotWindow::onClearPlot()
 void CurvePlotWindow::onSavePlot()
 {
     if (m_loadedFiles.isEmpty()) {
-        showStatus("Ã»ÓÐÊý¾Ý¿ÉÒÔ±£´æ", true);
+        showStatus("Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½Ô±ï¿½ï¿½ï¿½", true);
         return;
     }
 
@@ -488,16 +488,16 @@ void CurvePlotWindow::onSavePlot()
 
     QString filePath = QFileDialog::getSaveFileName(
         this,
-        "±£´æÍ¼±í",
+        "ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½",
         QDir::currentPath() + "/" + defaultName,
-        "PNGÍ¼Ïñ (*.png);;JPEGÍ¼Ïñ (*.jpg);;PDFÎÄ¼þ (*.pdf);;BMPÍ¼Ïñ (*.bmp)"
+        "PNGÍ¼ï¿½ï¿½ (*.png);;JPEGÍ¼ï¿½ï¿½ (*.jpg);;PDFï¿½Ä¼ï¿½ (*.pdf);;BMPÍ¼ï¿½ï¿½ (*.bmp)"
     );
 
     if (filePath.isEmpty()) {
         return;
     }
 
-    // ¸ù¾ÝÎÄ¼þÀ©Õ¹ÃûÈ·¶¨±£´æ¸ñÊ½
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
     QString suffix = QFileInfo(filePath).suffix().toLower();
     bool success = false;
 
@@ -514,16 +514,16 @@ void CurvePlotWindow::onSavePlot()
         success = m_customPlot->saveBmp(filePath, 1920, 1080, 2.0);
     }
     else {
-        // Ä¬ÈÏ±£´æÎªPNG
+        // Ä¬ï¿½Ï±ï¿½ï¿½ï¿½ÎªPNG
         filePath += ".png";
         success = m_customPlot->savePng(filePath, 1920, 1080, 2.0);
     }
 
     if (success) {
-        showStatus(QString("Í¼±íÒÑ±£´æµ½: %1").arg(QFileInfo(filePath).fileName()));
+        showStatus(QString("Í¼ï¿½ï¿½ï¿½Ñ±ï¿½ï¿½æµ½: %1").arg(QFileInfo(filePath).fileName()));
     }
     else {
-        showStatus("±£´æÍ¼±íÊ§°Ü", true);
+        showStatus("ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ê§ï¿½ï¿½", true);
     }
 }
 
@@ -532,7 +532,7 @@ void CurvePlotWindow::onXAxisChanged(int index)
     if (index >= 0) {
         m_currentXIndex = index;
         updatePlot();
-        showStatus(QString("XÖáÒÑÉèÖÃÎª: %1").arg(m_cmbXAxis->itemText(index)));
+        showStatus(QString("Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª: %1").arg(m_cmbXAxis->itemText(index)));
     }
 }
 
@@ -541,7 +541,7 @@ void CurvePlotWindow::onYAxisChanged(int index)
     if (index >= 0) {
         m_currentYIndex = index;
         updatePlot();
-        showStatus(QString("YÖáÒÑÉèÖÃÎª: %1").arg(m_cmbYAxis->itemText(index)));
+        showStatus(QString("Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª: %1").arg(m_cmbYAxis->itemText(index)));
     }
 }
 
@@ -550,9 +550,9 @@ void CurvePlotWindow::onMouseMove(QMouseEvent* event)
     if (m_customPlot->graphCount() > 0) {
         double x = m_customPlot->xAxis->pixelToCoord(event->pos().x());
         double y = m_customPlot->yAxis->pixelToCoord(event->pos().y());
-        m_lblCoordinates->setText(QString("×ø±ê: (%1, %2)").arg(x, 0, 'f', 3).arg(y, 0, 'f', 3));
+        m_lblCoordinates->setText(QString("ï¿½ï¿½ï¿½ï¿½: (%1, %2)").arg(x, 0, 'f', 3).arg(y, 0, 'f', 3));
     }
     else {
-        m_lblCoordinates->setText("×ø±ê: (0.000, 0.000)");
+        m_lblCoordinates->setText("ï¿½ï¿½ï¿½ï¿½: (0.000, 0.000)");
     }
 }
