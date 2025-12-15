@@ -49,6 +49,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="VtkRenderWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="CylinderExample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -133,19 +136,12 @@
       <Filter>FileReader</Filter>
     </ClInclude>
     <ClInclude Include="vtk_scn.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiProcessController.h">
-      <Filter>GUI_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SafeQueue.h">
-      <Filter>GUI_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ThreadPool.h">
-      <Filter>GUI_Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="VtkRenderWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="AdvancedCurveStyler.h">
       <Filter>Header Files</Filter>
     </QtMoc>

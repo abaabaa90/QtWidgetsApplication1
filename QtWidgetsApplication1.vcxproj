@@ -126,9 +126,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdvancedCurveStyler.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="cube_of_pipeline.cpp" />
-    <ClCompile Include="CurvePlotWindow.cpp" />
     <ClCompile Include="dicomReader.cpp" />
     <ClCompile Include="DimensionPlane.cpp" />
     <ClCompile Include="distancetotwopoint.cpp" />
@@ -140,6 +145,7 @@
     <ClCompile Include="ReaderHighSpeedDemo.cpp" />
     <ClCompile Include="thread_pool.h" />
     <ClCompile Include="TitleBar.cpp" />
+    <ClCompile Include="VtkRenderWidget.cpp" />
     <ClCompile Include="VTKWidget.cpp" />
     <ClCompile Include="WindowControl.cpp" />
     <QtRcc Include="QtWidgetsApplication1.qrc" />
@@ -171,6 +177,9 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
     <QtMoc Include="qcustomplot.h" />
+    <QtMoc Include="AdvancedCurveStyler.h" />
+    <ClInclude Include="CylinderExample.h" />
+    <QtMoc Include="VtkRenderWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="QtWidgetsApplication1.rc" />
