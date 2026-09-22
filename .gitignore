@@ -1,15 +1,75 @@
-﻿################################################################################
-# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+# QtWidgetsApplication1 —— 版本库忽略规则
+#
+# 原则：只提交源码、工程配置与资源；编译产物、IDE 缓存、大体积测试数据一律不入库。
+# 注意：已被跟踪的文件不会因为写进这里就自动失效，需要 git rm --cached 取消跟踪。
 ################################################################################
 
-/.vs/QtWidgetsApplication1/FileContentIndex
-/.vs/QtWidgetsApplication1/v17/ipch/AutoPCH/544ce6d08d86a847
-/.vs/QtWidgetsApplication1/v17
-/.vs/QtWidgetsApplication1/v17/.suo
-/.vs/QtWidgetsApplication1/v17/Browse.VC.db
-/.vs/QtWidgetsApplication1/v17/Browse.VC.db-shm
-/.vs/QtWidgetsApplication1/v17/Browse.VC.db-wal
-/.vs/QtWidgetsApplication1/v17/Browse.VC.opendb
-/.vs/QtWidgetsApplication1/v17/ipch/AutoPCH/e1387cf23f72d212
-/.vs/QtWidgetsApplication1/v17/ipch/AutoPCH/e1387cf23f72d212/DIMENSIONPLANE.ipch
-/dicom_demo
+# ==============================================================================
+# Visual Studio / MSBuild
+# ==============================================================================
+.vs/
+x64/
+GUI/x64/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Aa]rchive/
+*.aps
+*.user
+*.suo
+*.sdf
+*.opendb
+*.VC.db
+*.VC.db-shm
+*.VC.db-wal
+*.ipch
+*.idb
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.obj
+*.tlog
+*.log
+*.recipe
+*.res
+*.lastbuildstate
+*.FileListAbsolute.txt
+
+# ==============================================================================
+# Qt / 构建中间产物
+# ==============================================================================
+build-*/
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qmlc
+*.jsc
+Makefile
+Makefile.*
+*.pro.user
+
+# ==============================================================================
+# 大体积测试数据 / 素材（体积大、可重新获取，不入库）
+# ==============================================================================
+dicom_demo/
+file2.txt
+data.dat
+prostate.IMG
+*.IMG
+*.dcm
+*.zip
+
+# ==============================================================================
+# 临时文件 / 备份 / 草稿
+# ==============================================================================
+新建文件夹/
+NewFolder1/
+~$*
+*.bak
+*.orig
+*.tmp
+*~
