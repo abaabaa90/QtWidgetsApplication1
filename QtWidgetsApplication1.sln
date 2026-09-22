@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtWidgetsApplication1", "QtWidgetsApplication1.vcxproj", "{8A8BD3A0-F694-43FC-BEB6-E50676A074D4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GUI", "QtWidgetsApplication1.vcxproj", "{8A8BD3A0-F694-43FC-BEB6-E50676A074D4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Function", "..\Qt-Vtk1\Qt-Vtk1.vcxproj", "{1F07A901-BAB5-4B45-A40D-0BA0F2A7807A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8A8BD3A0-F694-43FC-BEB6-E50676A074D4} = {8A8BD3A0-F694-43FC-BEB6-E50676A074D4}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VTK", "..\VTK\VTK.vcxproj", "{694E45A6-FF5B-460E-8905-08C66C78817E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8A8BD3A0-F694-43FC-BEB6-E50676A074D4} = {8A8BD3A0-F694-43FC-BEB6-E50676A074D4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,14 @@ Global
 		{8A8BD3A0-F694-43FC-BEB6-E50676A074D4}.Debug|x64.Build.0 = Debug|x64
 		{8A8BD3A0-F694-43FC-BEB6-E50676A074D4}.Release|x64.ActiveCfg = Release|x64
 		{8A8BD3A0-F694-43FC-BEB6-E50676A074D4}.Release|x64.Build.0 = Release|x64
+		{1F07A901-BAB5-4B45-A40D-0BA0F2A7807A}.Debug|x64.ActiveCfg = Debug|x64
+		{1F07A901-BAB5-4B45-A40D-0BA0F2A7807A}.Debug|x64.Build.0 = Debug|x64
+		{1F07A901-BAB5-4B45-A40D-0BA0F2A7807A}.Release|x64.ActiveCfg = Release|x64
+		{1F07A901-BAB5-4B45-A40D-0BA0F2A7807A}.Release|x64.Build.0 = Release|x64
+		{694E45A6-FF5B-460E-8905-08C66C78817E}.Debug|x64.ActiveCfg = Debug|x64
+		{694E45A6-FF5B-460E-8905-08C66C78817E}.Debug|x64.Build.0 = Debug|x64
+		{694E45A6-FF5B-460E-8905-08C66C78817E}.Release|x64.ActiveCfg = Release|x64
+		{694E45A6-FF5B-460E-8905-08C66C78817E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

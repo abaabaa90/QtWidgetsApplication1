@@ -1,0 +1,531 @@
+/* ============================================================
+   ParaView 风格框架窗口 - 主题模板
+   $token 占位符在运行时由 ThemeManager 替换为具体颜色。
+   Light / Dark 共用这一份模板。
+   ============================================================ */
+
+/* ---------- 基础窗口外壳 (BaseWindow) ---------- */
+QWidget#titleBar {
+    background-color: $titleBarBg;
+}
+
+/* 顶部栏窗口标题文字（与菜单/工具栏统一风格） */
+QLabel#titleLabel {
+    color: $titleBarText;
+    background: transparent;
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 4px;
+}
+
+QWidget#contentWidget {
+    background-color: $windowBg;
+}
+
+/* 宿主 shell：透明背景，让外层圆角/阴影透出 */
+QMainWindow#appShell {
+    background-color: transparent;
+}
+
+/* 标题栏按钮（min/max/close/主题切换） */
+QPushButton#minButton,
+QPushButton#maxButton,
+QPushButton#closeButton,
+QPushButton#themeButton {
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    color: $titleBarText;
+    background: transparent;
+}
+
+QPushButton#minButton:hover,
+QPushButton#maxButton:hover,
+QPushButton#themeButton:hover {
+    background-color: $hoverOverlay;
+}
+
+QPushButton#closeButton:hover {
+    background-color: #E81123;
+    color: white;
+}
+
+/* ---------- 菜单栏 / 菜单 ---------- */
+QMenuBar {
+    background-color: $menuBarBg;
+    border-bottom: 1px solid $border;
+    color: $textPrimary;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 4px 10px;
+    color: $textPrimary;
+}
+
+QMenuBar::item:selected {
+    background-color: $panelAltBg;
+}
+
+QMenu {
+    background-color: $panelBg;
+    border: 1px solid $border;
+    color: $textPrimary;
+}
+
+QMenu::item {
+    background: transparent;
+    padding: 5px 22px 5px 20px;
+    color: $textPrimary;
+}
+
+QMenu::item:selected {
+    background-color: $selectionBg;
+    color: $accentText;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: $border;
+    margin: 4px 6px;
+}
+
+/* ---------- 工具栏 ---------- */
+QToolBar {
+    background-color: $toolBarBg;
+    border: none;
+    border-bottom: 1px solid $border;
+    spacing: 4px;
+    padding: 3px;
+}
+
+QToolBar::separator {
+    background: $border;
+    width: 1px;
+    margin: 2px 4px;
+}
+
+/* ---------- 顶部聚合栏：并入标题栏的菜单栏 / 工具栏 ---------- */
+QMenuBar#titleBarMenuBar {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+QMenuBar#titleBarMenuBar::item {
+    background: transparent;
+    padding: 4px 10px;
+    color: $titleBarText;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+QMenuBar#titleBarMenuBar::item:selected {
+    background-color: $hoverOverlay;
+    color: $titleBarText;
+}
+
+QToolBar#titleBarToolBar {
+    background: transparent;
+    border: none;
+    padding: 0;
+    spacing: 3px;
+}
+
+QToolBar#titleBarToolBar QToolButton {
+    color: $titleBarText;
+    background: transparent;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 9px;
+    font-size: 12px;
+}
+
+QToolBar#titleBarToolBar QToolButton:hover {
+    background-color: $hoverOverlay;
+    color: $titleBarText;
+}
+
+/* ---------- 功能区工具栏 (RibbonBar / RibbonPage / RibbonGroup) ---------- */
+QWidget#ribbonBar {
+    background-color: $panelBg;
+    border-bottom: 1px solid $border;
+}
+
+QTabBar#ribbonTabBar {
+    background: transparent;
+    qproperty-drawBase: 0;
+}
+
+QTabBar#ribbonTabBar::tab {
+    background: transparent;
+    color: $textPrimary;
+    border: none;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+QTabBar#ribbonTabBar::tab:selected {
+    color: $accent;
+    border-bottom: 2px solid $accent;
+}
+
+QTabBar#ribbonTabBar::tab:hover:!selected {
+    background-color: $panelAltBg;
+}
+
+QWidget#ribbonStack {
+    background: transparent;
+}
+
+QWidget#ribbonGroup {
+    background-color: $panelAltBg;
+    border: 1px solid $border;
+    border-radius: 4px;
+}
+
+QLabel#ribbonGroupTitle {
+    color: $textSecondary;
+    font-size: 11px;
+    border-top: 1px solid $border;
+    padding-top: 3px;
+}
+
+QToolButton#ribbonToolButton {
+    background: transparent;
+    border: none;
+    border-radius: 3px;
+    color: $textPrimary;
+    font-size: 11px;
+}
+
+QToolButton#ribbonToolButton:hover {
+    background-color: $selectionBg;
+    color: $accentText;
+}
+
+QToolButton#ribbonToolButton:pressed {
+    background-color: $borderStrong;
+}
+
+/* 功能区页签横向滚动区：透明融入背景 */
+QScrollArea#ribbonScroll,
+QScrollArea#ribbonScroll > QWidget > QWidget {
+    background: transparent;
+    border: none;
+}
+
+QWidget#ribbonPageContent {
+    background: transparent;
+}
+
+/* ---------- 状态栏 ---------- */
+QStatusBar {
+    background-color: $statusBarBg;
+    color: $textPrimary;
+    border-top: 1px solid $border;
+}
+
+QStatusBar QLabel {
+    color: $textPrimary;
+    background: transparent;
+}
+
+/* ---------- 停靠面板 (QDockWidget) ---------- */
+QDockWidget {
+    color: $textPrimary;
+}
+
+QDockWidget::title {
+    background-color: $panelAltBg;
+    border-bottom: 1px solid $border;
+    padding: 4px 8px;
+    text-align: left;
+    color: $textPrimary;
+    font-weight: bold;
+}
+
+QDockWidget::close-button,
+QDockWidget::float-button {
+    border: none;
+    background: transparent;
+    padding: 2px;
+}
+
+QDockWidget::close-button:hover,
+QDockWidget::float-button:hover {
+    background-color: $hoverOverlay;
+}
+
+/* ---------- 停靠面板自定义标题栏 (DockTitleBar / DockPanelBase) ---------- */
+QWidget#dockTitleBar {
+    background-color: $titleBarBg;
+    border: none;
+}
+
+QLabel#dockTitleLabel {
+    color: $titleBarText;
+    background: transparent;
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 6px;
+}
+
+QPushButton#dockTitleBtn {
+    border: none;
+    border-radius: 2px;
+    color: $titleBarText;
+    background: transparent;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+QPushButton#dockTitleBtn:hover {
+    background-color: $hoverOverlay;
+    color: $titleBarText;
+}
+
+QPushButton#dockTitleCloseBtn {
+    border: none;
+    border-radius: 2px;
+    color: $titleBarText;
+    background: transparent;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton#dockTitleCloseBtn:hover {
+    background-color: #E81123;
+    color: white;
+}
+
+/* 工程树：面板内去掉外边框 */
+QTreeWidget#projectTree {
+    border: none;
+}
+
+/* ---------- 渲染视图浮动占位 ---------- */
+QWidget#renderPlaceholder {
+    background-color: $windowBg;
+}
+
+QLabel#renderPlaceholderLabel {
+    color: $textSecondary;
+    font-size: 14px;
+    background: transparent;
+}
+
+/* ---------- 分隔条 ---------- */
+QSplitter::handle {
+    background-color: $border;
+}
+
+QSplitter::handle:hover {
+    background-color: $borderStrong;
+}
+
+QSplitter#renderViewSplitter::handle {
+    background-color: $borderStrong;
+}
+
+QSplitter#renderViewSplitter::handle:hover {
+    background-color: $accent;
+}
+
+/* ---------- 通用按钮 ---------- */
+QPushButton {
+    background-color: $panelBg;
+    color: $textPrimary;
+    border: 1px solid $border;
+    border-radius: 4px;
+    padding: 4px 12px;
+}
+
+QPushButton:hover {
+    background-color: $panelAltBg;
+    border: 1px solid $borderStrong;
+}
+
+QPushButton:checked {
+    background-color: $selectionBg;
+    color: $accentText;
+    border: 1px solid $accent;
+}
+
+QPushButton:pressed {
+    background-color: $borderStrong;
+}
+
+/* ---------- 输入 / 编辑控件 ---------- */
+QLineEdit, QPlainTextEdit, QTextEdit {
+    background-color: $inputBg;
+    color: $inputText;
+    border: 1px solid $border;
+    border-radius: 2px;
+    selection-background-color: $selectionBg;
+    selection-color: $accentText;
+}
+
+QComboBox {
+    background-color: $inputBg;
+    color: $inputText;
+    border: 1px solid $border;
+    border-radius: 2px;
+    padding: 2px 6px;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 18px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: $inputBg;
+    color: $inputText;
+    selection-background-color: $selectionBg;
+    selection-color: $accentText;
+    border: 1px solid $border;
+}
+
+/* ---------- 树 / 表 / 列表 ---------- */
+QTreeWidget, QTreeView, QTableWidget, QTableView, QListView, QListWidget {
+    background-color: $inputBg;
+    color: $inputText;
+    border: 1px solid $border;
+    gridline-color: $border;
+    selection-background-color: $selectionBg;
+    selection-color: $accentText;
+}
+
+QHeaderView::section {
+    background-color: $panelAltBg;
+    color: $textPrimary;
+    border: none;
+    border-right: 1px solid $border;
+    border-bottom: 1px solid $border;
+    padding: 4px;
+}
+
+/* ---------- 标签页（拖拽合并停靠时 QMainWindow 使用） ---------- */
+QTabWidget::pane {
+    border: 1px solid $border;
+    background-color: $panelBg;
+}
+
+QTabBar::tab {
+    background-color: $panelAltBg;
+    color: $textPrimary;
+    border: 1px solid $border;
+    padding: 4px 12px;
+    margin-right: 2px;
+}
+
+QTabBar::tab:selected {
+    background-color: $panelBg;
+    border-bottom-color: $accent;
+    color: $textPrimary;
+}
+
+QTabBar::tab:hover {
+    background-color: $borderStrong;
+}
+
+/* ---------- 渲染视图帧 (RenderViewFrame) ---------- */
+QWidget#renderViewTitleBar {
+    background-color: $titleBarBg;
+    border: none;
+}
+
+QLabel#renderViewTitleLabel {
+    color: $titleBarText;
+    background: transparent;
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 6px;
+}
+
+QPushButton#renderViewBtn {
+    border: none;
+    border-radius: 2px;
+    color: $titleBarText;
+    background: transparent;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+QPushButton#renderViewBtn:hover {
+    background-color: $hoverOverlay;
+    color: $titleBarText;
+}
+
+QPushButton#renderViewCloseBtn {
+    border: none;
+    border-radius: 2px;
+    color: $titleBarText;
+    background: transparent;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton#renderViewCloseBtn:hover {
+    background-color: #E81123;
+    color: white;
+}
+
+QWidget#renderViewContentArea {
+    background-color: $windowBg;
+}
+
+QWidget#renderViewNormalPage,
+QWidget#renderViewMaxPage {
+    background-color: $windowBg;
+}
+
+/* ---------- 滚动条 ---------- */
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background: $borderStrong;
+    border-radius: 4px;
+    min-height: 24px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: $accent;
+}
+
+QScrollBar:horizontal {
+    background: transparent;
+    height: 10px;
+    margin: 0;
+}
+
+QScrollBar::handle:horizontal {
+    background: $borderStrong;
+    border-radius: 4px;
+    min-width: 24px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: $accent;
+}
+
+QScrollBar::add-line,
+QScrollBar::sub-line {
+    background: none;
+    border: none;
+    height: 0;
+    width: 0;
+}
+
+QScrollBar::add-page,
+QScrollBar::sub-page {
+    background: none;
+}

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -52,17 +52,11 @@
     <ClCompile Include="VtkRenderWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CylinderExample.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AdvancedCurveStyler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="qcustomplot.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseWindow.cpp">
-      <Filter>GUI_Core</Filter>
     </ClCompile>
     <ClCompile Include="TitleBar.cpp">
       <Filter>GUI_Core</Filter>
@@ -71,6 +65,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelProperties.cpp">
       <Filter>GUI_Core</Filter>
     </ClCompile>
     <ClCompile Include="WindowControl.cpp">
@@ -94,12 +91,6 @@
     <ClCompile Include="VTKWidget.cpp">
       <Filter>GUI_3D_Window</Filter>
     </ClCompile>
-    <ClCompile Include="Reader.cpp">
-      <Filter>FileReader</Filter>
-    </ClCompile>
-    <ClCompile Include="CurvePlotWindow.cpp">
-      <Filter>GUI_Window</Filter>
-    </ClCompile>
     <ClCompile Include="MultiProcessController.cpp">
       <Filter>GUI_Core</Filter>
     </ClCompile>
@@ -109,9 +100,84 @@
     <ClCompile Include="ReaderHighSpeedDemo.cpp">
       <Filter>GUI_Core</Filter>
     </ClCompile>
+    <ClCompile Include="mmpio.h">
+      <Filter>GUI_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Reader.cpp">
+      <Filter>FileReader</Filter>
+    </ClCompile>
+    <ClCompile Include="main1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomLogTicker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenerateRandom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LegendDraggablePlot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Serizala.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Start.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StyleManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextDataReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WidgetStateController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderViewContainer.cpp">
+      <Filter>GUI_3D_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderViewFrame.cpp">
+      <Filter>GUI_3D_Window</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseWindow.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameworkWindow.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DockDragOverlay.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DockPanelBase.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="DockTitleBar.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectTreePanel.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="RibbonBar.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="RibbonGroup.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="RibbonPage.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ThemeManager.cpp">
+      <Filter>GUI_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBar\BaseTitleBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CylinderExample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StyleManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -120,9 +186,15 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainWindow.h">
+    <ClInclude Include="DockDragOverlay.h">
       <Filter>GUI_Core</Filter>
     </ClInclude>
+    <ClInclude Include="ModelObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <QtMoc Include="ModelProperties.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
     <ClInclude Include="WindowControl.h">
       <Filter>GUI_Core</Filter>
     </ClInclude>
@@ -132,10 +204,37 @@
     <ClInclude Include="vtkCharConvCompatibility.h">
       <Filter>FileReader</Filter>
     </ClInclude>
+    <ClInclude Include="vtk_scn.h">
+    </ClInclude>
+    <ClInclude Include="MultiProcessController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SafeQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Reader.h">
       <Filter>FileReader</Filter>
     </ClInclude>
-    <ClInclude Include="vtk_scn.h">
+    <ClInclude Include="mio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomLogTicker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LegendDraggablePlot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WidgetStateController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextDataReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBar\BaseTitleBar.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,12 +243,6 @@
     </QtMoc>
     <QtMoc Include="AdvancedCurveStyler.h">
       <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="qcustomplot.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="BaseWindow.h">
-      <Filter>GUI_Core</Filter>
     </QtMoc>
     <QtMoc Include="TitleBar.h">
       <Filter>GUI_Core</Filter>
@@ -160,8 +253,44 @@
     <QtMoc Include="VTKWidget.h">
       <Filter>GUI_3D_Window</Filter>
     </QtMoc>
-    <QtMoc Include="CurvePlotWindow.h">
-      <Filter>GUI_Window</Filter>
+    <QtMoc Include="qcustomplot.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BaseWindow.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
+    <QtMoc Include="FrameworkWindow.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
+    <QtMoc Include="DockPanelBase.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
+    <QtMoc Include="DockTitleBar.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
+    <QtMoc Include="ProjectTreePanel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RibbonBar.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
+    <QtMoc Include="RibbonGroup.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
+    <QtMoc Include="RibbonPage.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
+    <QtMoc Include="ThemeManager.h">
+      <Filter>GUI_Core</Filter>
+    </QtMoc>
+    <QtMoc Include="RenderViewContainer.h">
+      <Filter>GUI_3D_Window</Filter>
+    </QtMoc>
+    <QtMoc Include="RenderViewFrame.h">
+      <Filter>GUI_3D_Window</Filter>
+    </QtMoc>
+    <QtMoc Include="MainWindow.h">
+      <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

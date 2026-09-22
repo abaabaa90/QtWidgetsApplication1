@@ -1,4 +1,6 @@
-﻿#include "BaseWindow.h"
+#include "BaseWindow.h"
+#include "StyleManager.h"
+#include "ThemeManager.h"
 
 BaseWindow::BaseWindow(QWidget* parent, bool showCloseButton)
     : QWidget(parent)
@@ -10,32 +12,22 @@ BaseWindow::BaseWindow(QWidget* parent, bool showCloseButton)
     , m_shadowEnabled(true)
     , m_shadowBlurRadius(10)
 {
-    // 设置窗口标志
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinMaxButtonsHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    // 初始化成员
     initMembers();
-
-    // 初始化UI
     initUI();
-
-    // 初始化样式
     initStyle();
-
-    // 初始化连接
     initConnections();
 
-    // 默认大小
-    setWindowSize(800, 600);
+    int unit = StyleManager::baseUnit();
+    setWindowSize(StyleManager::goldenWidth(unit * 10), unit * 10);
 
-    // 根据参数设置是否显示关闭按钮
     m_closeButton->setVisible(showCloseButton);
 }
 
 BaseWindow::~BaseWindow()
 {
-    // 清理资源
 }
 
 void BaseWindow::initMembers()
@@ -58,131 +50,86 @@ void BaseWindow::initMembers()
 
 void BaseWindow::initUI()
 {
-    // 创建主布局
     m_mainLayout = new QVBoxLayout(this);
     m_mainLayout->setSpacing(0);
     m_mainLayout->setContentsMargins(m_shadowBlurRadius, m_shadowBlurRadius,
         m_shadowBlurRadius, m_shadowBlurRadius);
 
-    // 设置标题栏
     setupTitleBar();
-
-    // 设置内容区域
     setupContentArea();
-
-    // 更新窗口样式
     updateWindowStyle();
 }
 
 void BaseWindow::setupTitleBar()
 {
-    // 创建标题栏
+    int unit = StyleManager::baseUnit();
+    int btnSize = static_cast<int>(unit * 0.55);
+
     m_titleBar = new QWidget(this);
     m_titleBar->setObjectName("titleBar");
-    m_titleBar->setFixedHeight(40);
+    m_titleBar->setFixedHeight(static_cast<int>(unit * 0.78));
     m_titleBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
-    // 创建标题栏布局
     m_titleLayout = new QHBoxLayout(m_titleBar);
-    m_titleLayout->setSpacing(10);
-    m_titleLayout->setContentsMargins(15, 0, 10, 0);
+    m_titleLayout->setSpacing(static_cast<int>(unit * 0.2));
+    m_titleLayout->setContentsMargins(static_cast<int>(unit * 0.3), 0,
+                                       static_cast<int>(unit * 0.2), 0);
 
-    // 创建标题标签
     m_titleLabel = new QLabel("Base Window", m_titleBar);
     m_titleLabel->setObjectName("titleLabel");
     m_titleLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-    // 设置标题字体
     QFont titleFont = m_titleLabel->font();
-    titleFont.setPointSize(10);
+    titleFont.setPointSize(static_cast<int>(unit * 0.2));
     titleFont.setBold(true);
     m_titleLabel->setFont(titleFont);
 
-    // 创建按钮
-    m_minButton = new QPushButton("─", m_titleBar);
-    m_maxButton = new QPushButton("□", m_titleBar);
-    m_closeButton = new QPushButton("×", m_titleBar);
+    m_minButton = new QPushButton(QStringLiteral("─"), m_titleBar);
+    m_maxButton = new QPushButton(QStringLiteral("□"), m_titleBar);
+    m_closeButton = new QPushButton(QStringLiteral("×"), m_titleBar);
 
-    // 设置按钮对象名
     m_minButton->setObjectName("minButton");
     m_maxButton->setObjectName("maxButton");
     m_closeButton->setObjectName("closeButton");
 
-    // 设置按钮固定大小
-    m_minButton->setFixedSize(30, 30);
-    m_maxButton->setFixedSize(30, 30);
-    m_closeButton->setFixedSize(30, 30);
+    m_minButton->setFixedSize(btnSize, btnSize);
+    m_maxButton->setFixedSize(btnSize, btnSize);
+    m_closeButton->setFixedSize(btnSize, btnSize);
 
-    // 设置按钮样式
-    QString buttonStyle =
-        "QPushButton {"
-        "   border: none;"
-        "   border-radius: 4px;"
-        "   font-size: 14px;"
-        "   font-weight: bold;"
-        "}"
-        "QPushButton:hover {"
-        "   background-color: rgba(255, 255, 255, 30);"
-        "}";
-
-    m_minButton->setStyleSheet(buttonStyle);
-    m_maxButton->setStyleSheet(buttonStyle);
-
-    // 关闭按钮特殊样式
-    m_closeButton->setStyleSheet(
-        "QPushButton {"
-        "   border: none;"
-        "   border-radius: 4px;"
-        "   font-size: 14px;"
-        "   font-weight: bold;"
-        "}"
-        "QPushButton:hover {"
-        "   background-color: #E81123;"
-        "   color: white;"
-        "}");
-
-    // 将部件添加到标题栏布局
     m_titleLayout->addWidget(m_titleLabel);
     m_titleLayout->addStretch();
     m_titleLayout->addWidget(m_minButton);
     m_titleLayout->addWidget(m_maxButton);
     m_titleLayout->addWidget(m_closeButton);
 
-    // 将标题栏添加到主布局
     m_mainLayout->addWidget(m_titleBar);
 }
 
 void BaseWindow::setupContentArea()
 {
-    // 创建内容区域
     m_contentWidget = new QWidget(this);
     m_contentWidget->setObjectName("contentWidget");
     m_contentWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    // 创建内容布局
     m_contentLayout = new QVBoxLayout(m_contentWidget);
     m_contentLayout->setSpacing(0);
     m_contentLayout->setContentsMargins(0, 0, 0, 0);
 
-    // 将内容区域添加到主布局
-    m_mainLayout->addWidget(m_contentWidget, 1); // 1 表示可伸缩
+    m_mainLayout->addWidget(m_contentWidget, 1);
 }
 
 void BaseWindow::initStyle()
 {
-    // 设置默认背景色
     QPalette palette;
     palette.setColor(QPalette::Window, m_backgroundColor);
     m_contentWidget->setPalette(palette);
     m_contentWidget->setAutoFillBackground(true);
 
-    // 设置标题栏颜色
     QPalette titlePalette;
     titlePalette.setColor(QPalette::Window, m_titleBarColor);
     m_titleBar->setPalette(titlePalette);
     m_titleBar->setAutoFillBackground(true);
 
-    // 设置标题文字颜色
     QPalette titleLabelPalette;
     titleLabelPalette.setColor(QPalette::WindowText, Qt::white);
     m_titleLabel->setPalette(titleLabelPalette);
@@ -190,10 +137,47 @@ void BaseWindow::initStyle()
 
 void BaseWindow::initConnections()
 {
-    // 连接按钮信号
     connect(m_closeButton, &QPushButton::clicked, this, &BaseWindow::onCloseClicked);
     connect(m_minButton, &QPushButton::clicked, this, &BaseWindow::onMinClicked);
     connect(m_maxButton, &QPushButton::clicked, this, &BaseWindow::onMaxClicked);
+
+    // 主题切换时按当前主题刷新外壳颜色
+    connect(&ThemeManager::instance(), &ThemeManager::themeChanged,
+            this, &BaseWindow::applyCurrentTheme);
+}
+
+QPushButton* BaseWindow::addTitleBarButton(const QString& text, const QString& objectName)
+{
+    auto* btn = new QPushButton(text, m_titleBar);
+    btn->setObjectName(objectName);
+    btn->setFixedSize(m_minButton->size());
+    btn->setCursor(Qt::PointingHandCursor);
+    btn->setFocusPolicy(Qt::NoFocus);
+
+    // 插到最小化按钮之前（位于 min/max/close 的左边）
+    m_titleLayout->insertWidget(m_titleLayout->indexOf(m_minButton), btn);
+    return btn;
+}
+
+void BaseWindow::addTitleBarWidget(QWidget* widget)
+{
+    if (!widget || !m_titleLayout || !m_titleLabel) return;
+    // 插到标题文字之后、弹性空间之前（菜单栏/工具栏等并入顶部栏）
+    m_titleLayout->insertWidget(m_titleLayout->indexOf(m_titleLabel) + 1, widget);
+}
+
+void BaseWindow::applyCurrentTheme()
+{
+    setBackgroundColor(ThemeManager::color(ColorRole::Window));
+    setTitleBarColor(ThemeManager::color(ColorRole::TitleBar));
+
+    // 标题栏文字颜色跟随主题（浅色主题下为深色文字）
+    QPalette titleLabelPalette;
+    titleLabelPalette.setColor(QPalette::WindowText, ThemeManager::color(ColorRole::TitleText));
+    m_titleLabel->setPalette(titleLabelPalette);
+
+    updateWindowStyle();
+    update();
 }
 
 void BaseWindow::paintEvent(QPaintEvent* event)
@@ -203,18 +187,14 @@ void BaseWindow::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    // 绘制窗口阴影
-    if (m_shadowEnabled)
-    {
+    if (m_shadowEnabled) {
         drawWindowShadow(painter);
     }
 
-    // 绘制窗口背景
     QRect windowRect = rect().adjusted(m_shadowBlurRadius, m_shadowBlurRadius,
         -m_shadowBlurRadius, -m_shadowBlurRadius);
     drawRoundedRect(painter, windowRect, m_windowRadius);
 
-    // 填充背景色
     painter.setBrush(m_backgroundColor);
     painter.setPen(Qt::NoPen);
     painter.drawRoundedRect(windowRect, m_windowRadius, m_windowRadius);
@@ -222,9 +202,7 @@ void BaseWindow::paintEvent(QPaintEvent* event)
 
 void BaseWindow::drawWindowShadow(QPainter& painter)
 {
-    // 简单的阴影效果
-    for (int i = 0; i < m_shadowBlurRadius; ++i)
-    {
+    for (int i = 0; i < m_shadowBlurRadius; ++i) {
         QRect shadowRect = rect().adjusted(i, i, -i, -i);
         QColor shadowColor = QColor(0, 0, 0, 50 - i * 5);
         painter.setPen(QPen(shadowColor, 1));
@@ -242,12 +220,9 @@ void BaseWindow::drawRoundedRect(QPainter& painter, const QRect& rect, int radiu
 
 void BaseWindow::mousePressEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton)
-    {
-        // 如果点击在标题栏区域，开始拖动
+    if (event->button() == Qt::LeftButton) {
         if (m_titleBar->geometry().contains(event->pos()) ||
-            event->pos().y() <= m_titleBar->height() + m_shadowBlurRadius)
-        {
+            event->pos().y() <= m_titleBar->height() + m_shadowBlurRadius) {
             m_isDragging = true;
             m_dragStartPosition = event->globalPos() - frameGeometry().topLeft();
             event->accept();
@@ -257,8 +232,7 @@ void BaseWindow::mousePressEvent(QMouseEvent* event)
 
 void BaseWindow::mouseMoveEvent(QMouseEvent* event)
 {
-    if (m_isDragging && (event->buttons() & Qt::LeftButton))
-    {
+    if (m_isDragging && (event->buttons() & Qt::LeftButton)) {
         QPoint newPos = event->globalPos() - m_dragStartPosition;
         move(newPos);
         event->accept();
@@ -267,8 +241,7 @@ void BaseWindow::mouseMoveEvent(QMouseEvent* event)
 
 void BaseWindow::mouseReleaseEvent(QMouseEvent* event)
 {
-    if (event->button() == Qt::LeftButton)
-    {
+    if (event->button() == Qt::LeftButton) {
         m_isDragging = false;
         event->accept();
     }
@@ -282,8 +255,7 @@ void BaseWindow::resizeEvent(QResizeEvent* event)
 
 void BaseWindow::setWindowTitle(const QString& title)
 {
-    if (m_titleLabel)
-    {
+    if (m_titleLabel) {
         m_titleLabel->setText(title);
     }
     QWidget::setWindowTitle(title);
@@ -322,12 +294,10 @@ void BaseWindow::setMaximumWindowSize(int width, int height)
 void BaseWindow::setBackgroundColor(const QColor& color)
 {
     m_backgroundColor = color;
-
     QPalette palette;
     palette.setColor(QPalette::Window, m_backgroundColor);
     m_contentWidget->setPalette(palette);
     m_contentWidget->setAutoFillBackground(true);
-
     update();
 }
 
@@ -341,20 +311,11 @@ void BaseWindow::setWindowShadow(bool enabled, int blurRadius)
 {
     m_shadowEnabled = enabled;
     m_shadowBlurRadius = blurRadius;
-
-    // 更新边距
-    if (m_mainLayout)
-    {
-        if (enabled)
-        {
-            m_mainLayout->setContentsMargins(blurRadius, blurRadius, blurRadius, blurRadius);
-        }
-        else
-        {
-            m_mainLayout->setContentsMargins(0, 0, 0, 0);
-        }
+    if (m_mainLayout) {
+        m_mainLayout->setContentsMargins(
+            enabled ? blurRadius : 0, enabled ? blurRadius : 0,
+            enabled ? blurRadius : 0, enabled ? blurRadius : 0);
     }
-
     update();
 }
 
@@ -371,26 +332,22 @@ void BaseWindow::setTitleBarHeight(int height)
 void BaseWindow::setTitleBarColor(const QColor& color)
 {
     m_titleBarColor = color;
-
     QPalette palette;
     palette.setColor(QPalette::Window, m_titleBarColor);
     m_titleBar->setPalette(palette);
     m_titleBar->setAutoFillBackground(true);
-
     update();
 }
 
 void BaseWindow::setContentMargins(int left, int top, int right, int bottom)
 {
-    if (m_contentLayout)
-    {
+    if (m_contentLayout) {
         m_contentLayout->setContentsMargins(left, top, right, bottom);
     }
 }
 
 void BaseWindow::showCentered()
 {
-    // 居中显示
     QRect screenGeometry = QApplication::primaryScreen()->availableGeometry();
     int x = (screenGeometry.width() - width()) / 2;
     int y = (screenGeometry.height() - height()) / 2;
@@ -403,7 +360,6 @@ void BaseWindow::showMaximized()
     m_isMaximized = true;
     m_normalGeometry = geometry();
 
-    // 最大化时移除圆角和阴影
     int oldRadius = m_windowRadius;
     bool oldShadow = m_shadowEnabled;
 
@@ -413,7 +369,6 @@ void BaseWindow::showMaximized()
 
     QWidget::showMaximized();
 
-    // 恢复设置（用于下次显示）
     m_windowRadius = oldRadius;
     m_shadowEnabled = oldShadow;
 }
@@ -426,19 +381,12 @@ void BaseWindow::showMinimized()
 void BaseWindow::showNormal()
 {
     m_isMaximized = false;
-
-    // 恢复圆角和阴影
-    if (m_shadowEnabled)
-    {
+    if (m_shadowEnabled) {
         m_mainLayout->setContentsMargins(m_shadowBlurRadius, m_shadowBlurRadius,
             m_shadowBlurRadius, m_shadowBlurRadius);
     }
-
     QWidget::showNormal();
-
-    // 恢复之前的大小和位置
-    if (!m_normalGeometry.isNull())
-    {
+    if (!m_normalGeometry.isNull()) {
         setGeometry(m_normalGeometry);
     }
 }
@@ -450,7 +398,7 @@ QWidget* BaseWindow::contentWidget() const
 
 void BaseWindow::updateWindowStyle()
 {
-    // 更新样式表
+    // 颜色由 ThemeManager / theme.qss 统一管理，这里只生成标题栏/内容区的圆角规则
     QString styleSheet = QString(
         "QWidget#contentWidget {"
         "   background-color: %1;"
@@ -463,8 +411,8 @@ void BaseWindow::updateWindowStyle()
         "   border-top-right-radius: %2px;"
         "}"
     ).arg(m_backgroundColor.name())
-        .arg(m_windowRadius)
-        .arg(m_titleBarColor.name());
+     .arg(m_windowRadius)
+     .arg(m_titleBarColor.name());
 
     setStyleSheet(styleSheet);
 }
@@ -481,14 +429,11 @@ void BaseWindow::onMinClicked()
 
 void BaseWindow::onMaxClicked()
 {
-    if (m_isMaximized)
-    {
+    if (m_isMaximized) {
         showNormal();
-        m_maxButton->setText("□");
-    }
-    else
-    {
+        m_maxButton->setText(QStringLiteral("□"));
+    } else {
         showMaximized();
-        m_maxButton->setText("❐");
+        m_maxButton->setText(QStringLiteral("❐"));
     }
 }

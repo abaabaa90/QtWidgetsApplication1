@@ -2,9 +2,16 @@
 #define VTKRENDERWIDGET_H
 
 #include <QWidget>
+#include <QHash>
 #include <QVTKOpenGLNativeWidget.h>
+#include <vtkSmartPointer.h>
+#include <array>
+#include <vector>
 
-// VTKÇ°ÏòÉùÃ÷£¨¼õÉÙ±àÒëÒÀÀµ£©
+// ä¸»é¢˜æšä¸¾å‰å‘å£°æ˜ï¼ˆå®šä¹‰åœ¨ ThemeManager.hï¼‰
+enum class Theme;
+
+// VTKÇ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 class vtkConeSource;
 class vtkSphereSource;
 class vtkCylinderSource;
@@ -14,10 +21,23 @@ class vtkRenderer;
 class vtkRenderWindow;
 class vtkCamera;
 class vtkLight;
+class vtkCellPicker;
+class vtkBoxWidget;
+class vtkCallbackCommand;
+class vtkObject;
+
+/// äº¤äº’å¼ç»˜åˆ¶å·¥å…·
+enum class DrawTool {
+    None,
+    Line,       // ç›´çº¿ï¼šä¸¤ç‚¹
+    Polyline,   // å¤šæ®µçº¿ï¼šå¤šç‚¹ï¼ŒEnter å®Œæˆ
+    Circle,     // åœ†ï¼šåœ†å¿ƒ + åŠå¾„ç‚¹
+    Arc,        // åœ†å¼§ï¼šä¸‰ç‚¹
+};
 
 /**
- * @brief ¿ÉÖØÓÃµÄVTKäÖÈ¾²¿¼ş
- * ·â×°ÁËVTKäÖÈ¾¹¦ÄÜ£¬¿ÉÒÔÔÚÈÎºÎQt´°¿ÚÖĞÊ¹ÓÃ
+ * @brief ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½VTKï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½×°ï¿½ï¿½VTKï¿½ï¿½È¾ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îºï¿½Qtï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
  */
 class VtkRenderWidget : public QWidget
 {
@@ -25,122 +45,245 @@ class VtkRenderWidget : public QWidget
 
 public:
     /**
-     * @brief ¹¹Ôìº¯Êı
-     * @param parent ¸¸²¿¼ş
+     * @brief ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
+     * @param parent ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     explicit VtkRenderWidget(QWidget* parent = nullptr);
 
     /**
-     * @brief Îö¹¹º¯Êı
+     * @brief ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     ~VtkRenderWidget();
 
     /**
-     * @brief Ìí¼ÓÔ²×¶Ìåµ½³¡¾°
-     * @param height ¸ß¶È
-     * @param radius °ë¾¶
-     * @param resolution ·Ö±æÂÊ
-     * @param color RGBÑÕÉ«£¬·¶Î§0-1
-     * @param position Î»ÖÃ×ø±ê
+     * @brief ï¿½ï¿½ï¿½Ô²×¶ï¿½åµ½ï¿½ï¿½ï¿½ï¿½
+     * @param height ï¿½ß¶ï¿½
+     * @param radius ï¿½ë¾¶
+     * @param resolution ï¿½Ö±ï¿½ï¿½ï¿½
+     * @param color RGBï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½Î§0-1
+     * @param position Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     void addCone(double height = 3.0, double radius = 1.0, int resolution = 20,
         const double color[3] = nullptr, const double position[3] = nullptr);
 
     /**
-     * @brief Ìí¼ÓÇòÌåµ½³¡¾°
-     * @param radius °ë¾¶
-     * @param thetaResolution ¾­¶È·Ö±æÂÊ
-     * @param phiResolution Î³¶È·Ö±æÂÊ
-     * @param color RGBÑÕÉ«£¬·¶Î§0-1
-     * @param position Î»ÖÃ×ø±ê
+     * @brief ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½åµ½ï¿½ï¿½ï¿½ï¿½
+     * @param radius ï¿½ë¾¶
+     * @param thetaResolution ï¿½ï¿½ï¿½È·Ö±ï¿½ï¿½ï¿½
+     * @param phiResolution Î³ï¿½È·Ö±ï¿½ï¿½ï¿½
+     * @param color RGBï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½Î§0-1
+     * @param position Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     void addSphere(double radius = 1.0, int thetaResolution = 20, int phiResolution = 20,
         const double color[3] = nullptr, const double position[3] = nullptr);
 
     /**
-     * @brief Ìí¼ÓÔ²ÖùÌåµ½³¡¾°
-     * @param height ¸ß¶È
-     * @param radius °ë¾¶
-     * @param resolution ·Ö±æÂÊ
-     * @param color RGBÑÕÉ«£¬·¶Î§0-1
-     * @param position Î»ÖÃ×ø±ê
+     * @brief ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½åµ½ï¿½ï¿½ï¿½ï¿½
+     * @param height ï¿½ß¶ï¿½
+     * @param radius ï¿½ë¾¶
+     * @param resolution ï¿½Ö±ï¿½ï¿½ï¿½
+     * @param color RGBï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½Î§0-1
+     * @param position Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     void addCylinder(double height = 3.0, double radius = 1.0, int resolution = 20,
         const double color[3] = nullptr, const double position[3] = nullptr);
 
     /**
-     * @brief ÉèÖÃ±³¾°ÑÕÉ«
-     * @param r ºìÉ«·ÖÁ¿£¬·¶Î§0-1
-     * @param g ÂÌÉ«·ÖÁ¿£¬·¶Î§0-1
-     * @param b À¶É«·ÖÁ¿£¬·¶Î§0-1
+     * @brief æ·»åŠ æ­£æ–¹ä½“åˆ°åœºæ™¯
+     */
+    void addCube(double xLength = 2.0, double yLength = 2.0, double zLength = 2.0,
+        const double color[3] = nullptr, const double position[3] = nullptr);
+
+    /**
+     * @brief æ·»åŠ å¹³é¢ï¼ˆXY å¹³é¢çŸ©å½¢ï¼‰åˆ°åœºæ™¯
+     */
+    void addPlane(double width = 2.0, double depth = 2.0,
+        const double color[3] = nullptr, const double position[3] = nullptr);
+
+    /**
+     * @brief ï¿½ï¿½È¥ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ğµï¿½actorï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     */
+    void clearAll();
+
+    /**
+     * @brief ï¿½ï¿½ï¿½ã¼¯ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç° 3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª x/y/zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä£©
+     * @param points Ã¿ï¿½Ğµï¿½Ç° 3 ï¿½ï¿½Öµï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
+     * @param color RGBï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½Î§0-1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÄ¬ï¿½ï¿½É«
+     * @return ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½actor
+     */
+    vtkActor* addPointCloud(const std::vector<std::vector<double>>& points,
+        const double color[3] = nullptr);
+
+    /**
+     * @brief ä»¥æ•°æ®é›†ä¸ºå•ä½æ·»åŠ ä¸€ä¸ªç‚¹äº‘ï¼ˆæ”¯æŒå¤šä¸ªæ•°æ®é›†åŒå±æ˜¾ç¤ºï¼‰
+     * @param points æ¯è¡Œå‰ 3 ä¸ªå€¼ä½œä¸ºåæ ‡
+     * @param color RGB é¢œè‰²ï¼ˆèŒƒå›´ 0-1ï¼‰ï¼Œç©ºåˆ™ç”¨å†…ç½®è°ƒè‰²æ¿
+     * @return æ•°æ®é›† idï¼ˆåç»­ removeDataset/setDatasetVisible ç”¨ï¼‰
+     */
+    int addDataset(const std::vector<std::vector<double>>& points,
+                   const double color[3] = nullptr);
+    /// ç§»é™¤ä¸€ä¸ªæ•°æ®é›† actor
+    void removeDataset(int id);
+    /// æ˜¾ç¤º/éšè—ä¸€ä¸ªæ•°æ®é›† actor
+    void setDatasetVisible(int id, bool visible);
+    /// ç§»é™¤å…¨éƒ¨æ•°æ®é›† actorï¼ˆä¿ç•™é»˜è®¤åœºæ™¯ï¼‰
+    void clearDatasets();
+
+    /**
+     * @brief åˆ›å»ºæ¨¡å‹å¯¹è±¡ï¼ˆ0=æ­£æ–¹ä½“ 1=çƒ 2=åœ†æŸ± 3=åœ†é”¥ 4=å¹³é¢ï¼‰ï¼Œè¿”å› actor
+     */
+    vtkActor* createModel(int type, const double color[3] = nullptr,
+                          const double position[3] = nullptr);
+    /// ä»åœºæ™¯ç§»é™¤å¹¶åˆ é™¤ä¸€ä¸ª actor
+    void removeActor(vtkActor* actor);
+    /// é«˜äº®/å–æ¶ˆé«˜äº®ä¸€ä¸ª actorï¼ˆè¾¹ç¼˜æè¾¹ï¼‰
+    void setActorHighlighted(vtkActor* actor, bool highlighted);
+    /// ä¸ºæŒ‡å®š actor æŒ‚è½½ 3D å˜æ¢ gizmoï¼ˆvtkBoxWidgetï¼‰
+    void attachTransformGizmo(vtkActor* actor);
+    /// å¸è½½å˜æ¢ gizmo
+    void detachTransformGizmo();
+    /// ç›´æ¥è®¾ç½® actor çš„ä½ç½®/æ—‹è½¬(åº¦)/ç¼©æ”¾å¹¶é‡æ”¾ gizmo
+    void setActorTransform(vtkActor* actor,
+        double px, double py, double pz,
+        double rx, double ry, double rz,
+        double sx, double sy, double sz);
+
+    /// æ¿€æ´»/å–æ¶ˆäº¤äº’å¼ç»˜åˆ¶å·¥å…·ï¼ˆç›´çº¿/å¤šæ®µçº¿/åœ†/åœ†å¼§ï¼‰ï¼ŒNone=é€€å‡ºç»˜åˆ¶
+    void setDrawTool(DrawTool tool);
+    /// å½“å‰ç»˜åˆ¶å·¥å…·
+    DrawTool drawTool() const { return m_drawTool; }
+    /// æ¸…é™¤æ‰€æœ‰å·²ç»˜åˆ¶çš„è‰å›¾ï¼ˆç›´çº¿/åœ†/åœ†å¼§/å¤šæ®µçº¿ï¼‰
+    void clearSketches();
+
+    /**
+     * @brief ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½É«
+     * @param r ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§0-1
+     * @param g ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§0-1
+     * @param b ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§0-1
      */
     void setBackgroundColor(double r, double g, double b);
 
     /**
-     * @brief ÖØÖÃÏà»úµ½Ä¬ÈÏÊÓÍ¼
+     * @brief ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½Í¼
      */
     void resetCamera();
 
     /**
-     * @brief »ñÈ¡VTKäÖÈ¾´°¿Ú£¨ÓÃÓÚ¸ß¼¶²Ù×÷£©
-     * @return VTKäÖÈ¾´°¿ÚÖ¸Õë
+     * @brief ï¿½ï¿½È¡VTKï¿½ï¿½È¾ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½Ú¸ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return VTKï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
      */
     vtkRenderWindow* getRenderWindow();
 
     /**
-     * @brief »ñÈ¡VTKäÖÈ¾Æ÷£¨ÓÃÓÚ¸ß¼¶²Ù×÷£©
-     * @return VTKäÖÈ¾Æ÷Ö¸Õë
+     * @brief ï¿½ï¿½È¡VTKï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return VTKï¿½ï¿½È¾ï¿½ï¿½Ö¸ï¿½ï¿½
      */
     vtkRenderer* getRenderer();
 
     /**
-     * @brief ÏÔÊ¾×ø±êÖá
-     * @param show ÊÇ·ñÏÔÊ¾
+     * @brief ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @param show ï¿½Ç·ï¿½ï¿½ï¿½Ê¾
      */
     void showAxes(bool show);
 
     /**
-     * @brief ÉèÖÃ½»»¥Ä£Ê½
-     * @param mode 0=Ğı×ª£¬1=Æ½ÒÆ£¬2=Ëõ·Å
+     * @brief ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ä£Ê½
+     * @param mode 0=ï¿½ï¿½×ªï¿½ï¿½1=Æ½ï¿½Æ£ï¿½2=ï¿½ï¿½ï¿½ï¿½
      */
     void setInteractionMode(int mode);
 
 signals:
     /**
-     * @brief ÎïÌå±»Ñ¡ÖĞµÄĞÅºÅ
-     * @param actor ±»Ñ¡ÖĞµÄactor
+     * @brief ï¿½ï¿½ï¿½å±»Ñ¡ï¿½Ğµï¿½ï¿½Åºï¿½
+     * @param actor ï¿½ï¿½Ñ¡ï¿½Ğµï¿½actorï¼ˆnullptr è¡¨ç¤ºç‚¹åˆ°ç©ºç™½ï¼‰
      */
     void actorSelected(vtkActor* actor);
 
     /**
-     * @brief äÖÈ¾Íê³ÉĞÅºÅ
+     * @brief ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½Åºï¿½
      */
     void renderingFinished();
 
+    /// å˜æ¢ gizmo äº¤äº’ç»“æŸï¼Œactor å˜æ¢å·²æ›´æ–°
+    void transformChanged(vtkActor* actor);
+
+    /// ç»˜åˆ¶å·¥å…·åˆ‡æ¢ï¼ˆå«è§†å›¾å†… Esc é€€å‡ºï¼‰
+    void drawToolChanged(DrawTool tool);
+
 protected:
     /**
-     * @brief ³õÊ¼»¯VTK»·¾³
+     * @brief ï¿½ï¿½Ê¼ï¿½ï¿½VTKï¿½ï¿½ï¿½ï¿½
      */
     void initializeVtk();
 
     /**
-     * @brief ´´½¨Ä¬ÈÏ³¡¾°
+     * @brief ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï³ï¿½ï¿½ï¿½
      */
     void createDefaultScene();
 
     /**
-     * @brief Ìí¼Ó¹âÔ´
+     * @brief ï¿½ï¿½Ó¹ï¿½Ô´
      */
     void addLights();
 
 private:
-    QVTKOpenGLNativeWidget* m_vtkWidget;  // VTK OpenGL²¿¼ş
-    vtkRenderer* m_renderer;               // VTKäÖÈ¾Æ÷
-    std::vector<vtkActor*> m_actors;       // ´æ´¢ËùÓĞactor±ãÓÚ¹ÜÀí
-    bool m_initialized;                    // ³õÊ¼»¯±êÖ¾
+    QVTKOpenGLNativeWidget* m_vtkWidget;  // VTK OpenGLï¿½ï¿½ï¿½ï¿½
+    vtkRenderer* m_renderer;               // VTKï¿½ï¿½È¾ï¿½ï¿½
+    std::vector<vtkActor*> m_actors;       // ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½actorï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½
+    QHash<int, vtkActor*> m_datasetActors; // æ•°æ®é›† id -> actorï¼ˆå¤šæ•°æ®é›†åŒå±ï¼‰
+    int m_nextDatasetId = 1;               // æ•°æ®é›† id è‡ªå¢
+    bool m_initialized;                    // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ö¾
 
-    // Ë½ÓĞ¸¨Öú·½·¨
+    // Ë½ï¿½Ğ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     vtkActor* createActor(vtkPolyDataMapper* mapper, const double color[3], const double position[3]);
+    vtkActor* createPointCloudActor(const std::vector<std::vector<double>>& points,
+                                    const double color[3]);
+
+    // å»ºæ¨¡ï¼šæ‹¾å– / gizmo é™æ€å›è°ƒ
+    static void OnPickCallback(vtkObject* caller, unsigned long eid, void* clientData, void*);
+    static void OnBoxCallback(vtkObject* caller, unsigned long eid, void* clientData, void*);
+    static void OnMoveCallback(vtkObject* caller, unsigned long eid, void* clientData, void*);
+    static void OnKeyCallback(vtkObject* caller, unsigned long eid, void* clientData, void*);
+
+    // äº¤äº’å¼ç»˜åˆ¶
+    void advanceDraw(const std::array<double, 3>& p);   // å–‚ä¸€ä¸ªç¡®è®¤ç‚¹
+    void finishPolyline();
+    void resetDraw();
+    void updatePreview();
+    void clearPreview();
+    std::array<double, 3> worldPointOnPlane(int x, int y);   // ç‚¹å‡» -> z=0 å¹³é¢ä¸–ç•Œåæ ‡
+    vtkActor* makePolylineActor(const std::vector<std::array<double, 3>>& pts,
+                                const double color[3], double width);
+    vtkActor* addSketchLine(const std::array<double, 3>& p1, const std::array<double, 3>& p2);
+    vtkActor* addSketchCircle(const std::array<double, 3>& c, double radius);
+    vtkActor* addSketchArc(const std::array<double, 3>& p1, const std::array<double, 3>& p2,
+                           const std::array<double, 3>& p3);
+    static std::vector<std::array<double, 3>> circlePoints(const std::array<double, 3>& c,
+                                                           double r, int n);
+    static std::vector<std::array<double, 3>> arcPoints(const std::array<double, 3>& p1,
+                                                        const std::array<double, 3>& p2,
+                                                        const std::array<double, 3>& p3, int n);
+
+    // æŒ‰ä¸»é¢˜è®¾ç½®æ¸²æŸ“è§†å£èƒŒæ™¯è‰²
+    void applyThemeBackground(Theme theme);
+
+    vtkSmartPointer<vtkCellPicker>     m_picker;     // ç‚¹é€‰æ‹¾å–å™¨
+    vtkSmartPointer<vtkCallbackCommand> m_pickCB;    // æ‹¾å–è§‚å¯Ÿè€…
+    vtkSmartPointer<vtkCallbackCommand> m_moveCB;    // é¼ æ ‡ç§»åŠ¨è§‚å¯Ÿè€…ï¼ˆé¢„è§ˆï¼‰
+    vtkSmartPointer<vtkCallbackCommand> m_keyCB;     // é”®ç›˜è§‚å¯Ÿè€…ï¼ˆEnter/Escï¼‰
+    vtkSmartPointer<vtkBoxWidget>      m_boxWidget;  // å˜æ¢ gizmo
+    vtkSmartPointer<vtkCallbackCommand> m_boxCB;     // gizmo è§‚å¯Ÿè€…
+    vtkActor* m_gizmoActor = nullptr;                // å½“å‰æŒ‚ gizmo çš„ actor
+    int m_pressX = -1;                               // æ‹¾å–æŒ‰ä¸‹ç‚¹
+    int m_pressY = -1;
+
+    // ç»˜åˆ¶çŠ¶æ€
+    DrawTool m_drawTool = DrawTool::None;
+    std::vector<std::array<double, 3>> m_drawPts;    // å·²ç¡®è®¤ç‚¹
+    std::array<double, 3> m_cursorPt = { 0.0, 0.0, 0.0 };  // å…‰æ ‡ä¸–ç•Œç‚¹ï¼ˆé¢„è§ˆç”¨ï¼‰
+    vtkActor* m_previewActor  = nullptr;             // æ©¡çš®ç­‹é¢„è§ˆ
+    vtkPolyDataMapper* m_previewMapper = nullptr;
+    std::vector<vtkActor*> m_sketchActors;           // å·²ç»˜åˆ¶çš„è‰å›¾
 };
 
 #endif // VTKRENDERWIDGET_H
